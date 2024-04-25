@@ -65,4 +65,4 @@ Happy coding!
 
 The deadline for the backend project is May 8th End of day (Before the presentation day)
 
-The countryside developers
+The countryside developers.
