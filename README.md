@@ -63,4 +63,4 @@ Happy coding!
 
 ## Deadline
 
-The deadline for the backend project is May 8th End of day (Before the presentation day)
+The Deadline for the backend project is May 8th End of day (Before the presentation day)
