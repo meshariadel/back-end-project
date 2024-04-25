@@ -63,6 +63,9 @@ Happy coding!
 
 ## Deadline
 
-The deadline for the backend project is May 8th End of day (Before the presentation day)
+<<<<<<<<< Temporary merge branch 1
+The deadline for the backend project is May 8th End of day (before the presentation day)
+=========
+The Deadline for the backend project is May 8th End of day (Before the presentation day)
 
-The countryside developers.
+> > > > > > > > > Temporary merge branch 2
