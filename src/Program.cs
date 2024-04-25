@@ -17,12 +17,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.Run();
-//
 
 
-
-//
-
-
-
-//HEllo
+// New Comment
