@@ -8,16 +8,20 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
     public class User
     {
 
-        private string _userId;
-        private string _fullName;
-        private string _role;
-        private string _email;
+
+        public string UserId {get; set;}
+        public string FullName {get; set;}
+        public string Role {get; set;}
+        public string Email { get; set;}
         public User(string userId, string fullName, string role, string email){
         
-        _userId = userId;
-        _fullName = fullName;
-        _role = role;
-        _email = email;
+        UserId = userId;
+        FullName = fullName;
+        Role = role;
+        Email = email;
+
         }
+        
+        
     }
 }
