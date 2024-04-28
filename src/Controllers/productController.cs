@@ -7,15 +7,16 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.co
 
 public class productController : ControllerBase
 {
-    private List<Product> _products;
-    public productController()
+
+    private IProductService _productService;
+    public productController(IProductService productService)
     {
-        _products = new DatabaseContext().products;
+        _productService = productService;
     }
     [HttpGet]
     public List<Product> FindAll()
     {
-        return _products;
+        return _productService.FindAll();
 
     }
 

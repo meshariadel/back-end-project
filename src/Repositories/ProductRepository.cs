@@ -5,9 +5,14 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers;
 
 public class ProductRepository : IProductRepository
 {
-    private List<Product> products;
+    private List<Product> _product;
+
+    public ProductRepository()
+    {
+        _product = new DatabaseContext().products;
+    }
     public List<Product> FindAll()
     {
-        return products;
+        return _product;
     }
 }
