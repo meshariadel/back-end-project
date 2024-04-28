@@ -1,23 +1,24 @@
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Entites;
 
 
-public class OrderItems{
-
-public OrderItems(int Quantity, int Total_pirce)
+public class OrderItem
 {
-quantity = Quantity;
 
-total_pirce = Total_pirce;
+    public OrderItem(int quantity, decimal totalPirce)
+    {
+        Quantity = quantity;
 
-}
+        TotalPirce = totalPirce;
 
-public string order_item_id {get;} = Guid.NewGuid().ToString();
-public string order_id {get; set; } = Guid.NewGuid().ToString();
+    }
 
-public string product_id {get; set;} = Guid.NewGuid().ToString();
+    public string OrderItemId { get; } = Guid.NewGuid().ToString();
+    public string OrderId { get; set; } = Guid.NewGuid().ToString();
 
-public int quantity {get; set;}
+    public string ProductId { get; set; } = Guid.NewGuid().ToString();
 
-public int total_pirce {get; set;}
+    public int Quantity { get; }
+
+    public decimal TotalPirce { get; }
 
 }
