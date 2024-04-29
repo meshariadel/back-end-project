@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.User.Controllers
 {
-    public class UserController : ControllerTemplate
+    public class userController : ControllerTemplate
     {
         private IUserService _userService;
 
-        public UserController(IUserService userService)
+        public userController(IUserService userService)
         {
             _userService = userService;
         }
