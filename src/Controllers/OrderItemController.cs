@@ -34,5 +34,17 @@ public class OrderItemController : ControllerBase
     }
 
 
+    [HttpGet("delete")]
+
+    public List<OrderItem> DeleteAll()
+    {
+        var contoller = new UserService();
+
+        return contoller.DeleteAll();
+
+
+    }
+
+
 }
 

@@ -42,4 +42,15 @@ public class OrderItemRepository
 
     }
 
+
+    public List<OrderItem> DeleteAll()
+    {
+
+
+        _orderitems.Clear();
+
+        return _orderitems;
+
+    }
+
 }

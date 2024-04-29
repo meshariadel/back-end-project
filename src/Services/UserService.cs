@@ -25,4 +25,12 @@ public class UserService
 
         return services.UpdateOne(orderItemId, newQuantity, newTotalPrice);
     }
+
+    public List<OrderItem> DeleteAll()
+    {
+
+        var services = new OrderItemRepository();
+
+        return services.DeleteAll();
+    }
 }
