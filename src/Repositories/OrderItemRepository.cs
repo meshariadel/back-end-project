@@ -3,23 +3,22 @@ using Microsoft.VisualBasic;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Databases;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Entites;
 
-namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Repositories;
+namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.OrderItemRepositories;
 
 
 
 
 
-public class Repository
+public class OrderItemRepository
 {
     private List<OrderItem> _orderitems;
-    public Repository()
+    public OrderItemRepository()
     {
-        _orderitems = new DatabaseContext().order_item;
+        _orderitems = new DatabaseContext().OrderItem;
     }
 
     public List<OrderItem> FindAll()
     {
-        Console.WriteLine("test");
         return _orderitems;
     }
 

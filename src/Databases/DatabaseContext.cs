@@ -4,13 +4,14 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Databa
 
 
 
-public class DatabaseContext 
+public class DatabaseContext
 {
-    public List<OrderItem> order_item;
+    public List<OrderItem> OrderItem;
 
-    public DatabaseContext(){
+    public DatabaseContext()
+    {
 
-        order_item = [
+        OrderItem = [
             new OrderItem(1,100),
 
             new OrderItem(2,200),
@@ -18,7 +19,7 @@ public class DatabaseContext
             new OrderItem(6,7700),
 
             new OrderItem(3,1300),
-            
+
 
 
         ];
