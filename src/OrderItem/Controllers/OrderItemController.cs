@@ -22,7 +22,7 @@ public class OrderItemController : ControllerBase
         return controllFindAll.FindAll();
     }
 
-    [HttpPost]
+    [HttpPost("updateone")]
 
     public OrderItem? UpdateOne(string orderItemId, int newQuantity, decimal newTotalPrice)
 
