@@ -17,8 +17,10 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
             return _users;
         }
         
-        public User GetByEmail(string email){
-            return new User("","","","");
+        public User? GetOne(string userId){
+        
+            User? user = _users.FirstOrDefault( aUser => aUser.UserId == userId);
+            return user;
         }
     }
 }
