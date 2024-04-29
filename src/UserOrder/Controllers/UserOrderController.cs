@@ -19,13 +19,22 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Co
         }
 
         [HttpGet]
-        public IEnumerable<UserOrder>FindAll()
+        public IEnumerable<UserOrder> FindAll()
         {
             return _userOrderService.FindAll();
         }
         [HttpPost]
-        public IEnumerable<UserOrder> CreateOne([FromBody] UserOrder userOrder){
-            return _userOrderService.CreateOne(userOrder);
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+        public ActionResult<IEnumerable<UserOrder>> CreateOne([FromBody] UserOrder userOrder)
+        {
+            if (userOrder is not null)
+            {
+                _userOrderService.CreateOne(userOrder);
+                return CreatedAtAction(nameof(CreateOne), userOrder);
+            }
+            return BadRequest();
 
         }
 
