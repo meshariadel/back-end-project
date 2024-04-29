@@ -18,4 +18,8 @@ public class productService : IProductService
         return _productRepository.FindAll();
     }
 
+    public Product? FindOne(string product)
+    {
+        throw new NotImplementedException();
+    }
 }

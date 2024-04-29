@@ -7,10 +7,7 @@ public class ProductRepository : IProductRepository
 {
     private List<Product> _product;
 
-    public ProductRepository()
-    {
-        _product = new DatabaseContext().products;
-    }
+
     public List<Product> FindAll()
     {
         return _product;
