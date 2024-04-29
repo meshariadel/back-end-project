@@ -18,7 +18,6 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
         [HttpGet]
         public IEnumerable<User> GetAll()
         {
-
             return _userService.GetAll();
         }
 
@@ -27,5 +26,14 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
         {
             return _userService.GetOne(userId);
         }
+
+        [HttpPatch("userId")]
+        public User UpdateOne(string userId, [FromBody] string newName)
+        {
+            return _userService.UpdateOne(userId, newName);
+        }
+
+
+
     }
 }

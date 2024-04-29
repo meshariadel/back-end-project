@@ -10,5 +10,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
         public IEnumerable<User> GetAll();
 
         public User? GetOne(string userId);
+
+        public User UpdateOne(string userId, string newName);
     }
 }
