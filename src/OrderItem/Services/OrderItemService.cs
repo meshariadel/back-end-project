@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Entites;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.OrderItemRepositories;
+using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Abstractions;
 
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Services;
 
 
 
-public class UserService
+public class OrderItemService : IOrderItemService
 {
 
     public List<OrderItem> FindAll()

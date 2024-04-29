@@ -11,13 +11,13 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Contro
 
 [Route("[controller]")]
 
-public class OrderItemController : ControllerBase
+public class OrderItemController : ControllerTemplate
 {
     [HttpGet]
 
     public List<OrderItem> FindAll()
     {
-        var controllFindAll = new UserService();
+        var controllFindAll = new OrderItemService();
 
         return controllFindAll.FindAll();
     }
@@ -28,7 +28,7 @@ public class OrderItemController : ControllerBase
 
     {
 
-        var controllUpdateOne = new UserService();
+        var controllUpdateOne = new OrderItemService();
 
         return controllUpdateOne.UpdateOne(orderItemId, newQuantity, newTotalPrice);
     }
@@ -38,7 +38,7 @@ public class OrderItemController : ControllerBase
 
     public List<OrderItem> DeleteAll()
     {
-        var contoller = new UserService();
+        var contoller = new OrderItemService();
 
         return contoller.DeleteAll();
 
@@ -48,3 +48,6 @@ public class OrderItemController : ControllerBase
 
 }
 
+public class ControllerTemplate
+{
+}

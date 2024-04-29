@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Databases;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Entites;
+using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Abstractions;
 
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.OrderItemRepositories;
 
@@ -9,7 +10,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.OrderI
 
 
 
-public class OrderItemRepository
+public class OrderItemRepository : IOrderItemRepository
 {
     private List<OrderItem> _orderitems;
     public OrderItemRepository()
