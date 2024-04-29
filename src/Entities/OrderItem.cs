@@ -17,8 +17,8 @@ public class OrderItem
 
     public string ProductId { get; set; } = Guid.NewGuid().ToString();
 
-    public int Quantity { get; }
+    public int Quantity { get; set; }
 
-    public decimal TotalPirce { get; }
+    public decimal TotalPirce { get; set; }
 
 }

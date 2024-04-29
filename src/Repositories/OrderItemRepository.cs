@@ -23,4 +23,23 @@ public class OrderItemRepository
     }
 
 
+    public OrderItem? UpdateOne(string orderItemId, int newQuantity, decimal newTotalPrice)
+    {
+
+        OrderItem? itemToUpdate = _orderitems.FirstOrDefault(item => item.OrderItemId == orderItemId);
+        if (itemToUpdate != null)
+        {
+            // Update properties of the found item
+            itemToUpdate.Quantity = newQuantity;
+            itemToUpdate.TotalPirce = newTotalPrice;
+            return itemToUpdate;
+        }
+        else
+        {
+            throw new ArgumentException("Order item not found");
+        }
+
+
+    }
+
 }

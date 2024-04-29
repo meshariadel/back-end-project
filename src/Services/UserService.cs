@@ -18,5 +18,11 @@ public class UserService
         return servicesFindAll.FindAll();
     }
 
+    public OrderItem? UpdateOne(string orderItemId, int newQuantity, decimal newTotalPrice)
 
+    {
+        var services = new OrderItemRepository();
+
+        return services.UpdateOne(orderItemId, newQuantity, newTotalPrice);
+    }
 }

@@ -13,14 +13,25 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Contro
 
 public class OrderItemController : ControllerBase
 {
-[HttpGet]
+    [HttpGet]
 
-public List<OrderItem> FindAll()
-{
-    var controllFindAll = new UserService();
+    public List<OrderItem> FindAll()
+    {
+        var controllFindAll = new UserService();
 
-    return controllFindAll.FindAll();
-}
+        return controllFindAll.FindAll();
+    }
+
+    [HttpPost]
+
+    public OrderItem? UpdateOne(string orderItemId, int newQuantity, decimal newTotalPrice)
+
+    {
+
+        var controllUpdateOne = new UserService();
+
+        return controllUpdateOne.UpdateOne(orderItemId, newQuantity, newTotalPrice);
+    }
 
 
 }
