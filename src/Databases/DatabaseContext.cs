@@ -1,25 +1,23 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-
-using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Entities;
-
-namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src;
-
-
-public class DatabaseContext
+namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.User.Controllers
 {
-    public List<UserOrder> userOrder;
-    public List<Product> products;
-    public DatabaseContext()
+    public class DataBaseContext
     {
-        products = [
-            new Product( ProductSize.L, "Red",  155.99 ,12 ,"picture","T-shirt","red t-shirt"),
-            new Product( ProductSize.S, "Red",  155.99 ,12 ,"picture","T-shirt","red t-shirt"),
-            new Product( ProductSize.M, "Red",  155.99 ,12 ,"picture","T-shirt","red t-shirt")
-            ];
-            userOrder = [
-                new UserOrder("1","1","1","Riyadh",DateTime.Now,new DateTime(2024,05,01),UserOrder.OrderStatus.OutForDelivery)
-            ];
+        public IEnumerable<User> users;
 
+        public DataBaseContext(){
+            
+            users = [
+                new User("1","Jon Jones","User","JonJones@gmail.com"),
+                new User("2","Stepe Miocic","User","StepeMiocic@gmail.com"),
+                new User("3","Max Holloway","User","MaxHolloway@gmail.com"),
+                new User("4","Dana White","Admin","DanaWhite@gmail.com")
+            ];
+        }
 
         
     }

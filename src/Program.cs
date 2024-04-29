@@ -1,5 +1,3 @@
-
-using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Repository;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Service;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.User.Controllers;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers;
