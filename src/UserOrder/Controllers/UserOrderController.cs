@@ -27,12 +27,12 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Co
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public ActionResult<IEnumerable<UserOrder>> CreateOne([FromBody] UserOrder userOrder)
+        public ActionResult<UserOrder> CreateOne([FromBody] UserOrder userOrder)
         {
             if (userOrder is not null)
             {
-                _userOrderService.CreateOne(userOrder);
-                return CreatedAtAction(nameof(CreateOne), userOrder);
+                var createdUserOrder = _userOrderService.CreateOne(userOrder);
+                return CreatedAtAction(nameof(CreateOne), createdUserOrder);
             }
             return BadRequest();
 

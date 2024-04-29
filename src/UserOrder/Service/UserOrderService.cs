@@ -22,6 +22,11 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Se
         }
         public IEnumerable<UserOrder> CreateOne(UserOrder userOrder)
         {
+            UserOrder? FoundUserOrder = _userOrderRepository.FindOne(userOrder);
+            if (FoundUserOrder is not null)
+            {
+                return null;
+            }
             return _userOrderRepository.CreateOne(userOrder);
         }
 

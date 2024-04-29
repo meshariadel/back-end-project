@@ -18,6 +18,12 @@ public class UserOrderRepository : IUserOrderRepository
         _userOrder = _userOrder.Append(userOrder);
         return _userOrder;
     }
+    public UserOrder? FindOne(UserOrder NewUserOrder)
+    {
+        UserOrder? userOrder = _userOrder.FirstOrDefault(userOrder => userOrder.OrderId == NewUserOrder.OrderId);
+
+        return userOrder;
+    }
 
 
 
