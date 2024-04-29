@@ -8,8 +8,8 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Ab
 {
     public interface IUserOrderRepository
     {
-        public List<UserOrder> FindAll();
-        public List<UserOrder> CreateOne(UserOrder userOrder);
+        public IEnumerable<UserOrder> FindAll();
+        public IEnumerable<UserOrder> CreateOne(UserOrder userOrder);
 
 
     }

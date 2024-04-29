@@ -16,11 +16,11 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Se
             _userOrderRepository = userOrderRepository;
         }
 
-        public List<UserOrder> FindAll()
+        public IEnumerable<UserOrder> FindAll()
         {
             return _userOrderRepository.FindAll();
         }
-        public List<UserOrder> CreateOne(UserOrder userOrder)
+        public IEnumerable<UserOrder> CreateOne(UserOrder userOrder)
         {
             return _userOrderRepository.CreateOne(userOrder);
         }

@@ -3,19 +3,19 @@ using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Abstra
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Entities;
 public class UserOrderRepository : IUserOrderRepository
 {
-    private List<UserOrder> _userOrder;
+    private IEnumerable<UserOrder> _userOrder;
 
     public UserOrderRepository()
     {
         _userOrder = new UserOrderDatabaseContext().userOrder;
     }
-    public List<UserOrder> FindAll()
+    public IEnumerable<UserOrder> FindAll()
     {
         return _userOrder;
     }
-    public List<UserOrder> CreateOne(UserOrder userOrder)
+    public IEnumerable<UserOrder> CreateOne(UserOrder userOrder)
     {
-        _userOrder.Add(userOrder);
+        _userOrder = _userOrder.Append(userOrder);
         return _userOrder;
     }
 
