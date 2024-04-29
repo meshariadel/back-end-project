@@ -16,5 +16,10 @@ public class productController : ControllerTemplate
         return _productService.FindAll();
 
     }
+    [HttpGet("{productId}")]
+    public Product? FindOne(string productId)
+    {
+        return _productService.FindOne(productId);
+    }
 
 }

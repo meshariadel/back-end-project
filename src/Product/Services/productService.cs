@@ -18,4 +18,8 @@ public class productService : IProductService
         return _productRepository.FindAll();
     }
 
+    public Product? FindOne(string productId)
+    {
+        return _productRepository.FindOne(productId);
+    }
 }

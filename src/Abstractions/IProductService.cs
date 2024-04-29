@@ -4,4 +4,5 @@ public interface IProductService
 {
 
     public List<Product> FindAll();
+    public Product? FindOne(string product);
 }

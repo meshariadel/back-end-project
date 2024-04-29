@@ -15,4 +15,10 @@ public class ProductRepository : IProductRepository
     {
         return _product;
     }
+    public Product? FindOne(string productId)
+    {
+        Product? product = _product.FirstOrDefault(product => product._ProductId == productId);
+        return product;
+
+    }
 }

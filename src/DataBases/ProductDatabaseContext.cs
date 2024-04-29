@@ -11,9 +11,9 @@ public class ProductDatabaseContext
     public ProductDatabaseContext()
     {
         products = [
-            new Product( ProductSize.L, "Red",  155.99 ,12 ,"picture","T-shirt","red t-shirt"),
-            new Product( ProductSize.S, "Red",  155.99 ,12 ,"picture","T-shirt","red t-shirt"),
-            new Product( ProductSize.M, "Red",  155.99 ,12 ,"picture","T-shirt","red t-shirt")
+            new Product("1", ProductSize.L, "Red",  155.99 ,12 ,"picture","T-shirt","red t-shirt"),
+            new Product( "2",ProductSize.S, "Red",  155.99 ,12 ,"picture","T-shirt","red t-shirt"),
+            new Product( "3",ProductSize.M, "Red",  155.99 ,12 ,"picture","T-shirt","red t-shirt")
             ];
 
     }
