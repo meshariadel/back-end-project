@@ -2,6 +2,10 @@ using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Abstra
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Repository;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Service;
 
+using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers;
+using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Abstractions;
+using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.controllers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -13,10 +17,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserOrderService, UserOrderService>();
 builder.Services.AddScoped<IUserOrderRepository, UserOrderRepository>();
 
+builder.Services.AddScoped<IProductService, productService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 var app = builder.Build();
 
 
 app.MapControllers();
+
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
