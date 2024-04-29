@@ -20,5 +20,11 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
             return _userService.GetAll();
         }
 
+        [HttpGet("{userId}")]
+
+        public User GetOne(){
+            return new User("","","","");
+        }
+
     }
 }
