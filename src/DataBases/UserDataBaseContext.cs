@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.User.Controllers
 {
-    public class DataBaseContext
+    public class UserDataBaseContext
     {
         public IEnumerable<User> users;
 
-        public DataBaseContext(){
+        public UserDataBaseContext(){
             
             users = [
                 new User("1","Jon Jones","User","JonJones@gmail.com"),

@@ -5,7 +5,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
         private IEnumerable<User> _users;
 
         public UserRepository(){
-            _users = new DataBaseContext().users;
+            _users = new UserDataBaseContext().users;
         }
 
         public IEnumerable<User> GetAll(){      
