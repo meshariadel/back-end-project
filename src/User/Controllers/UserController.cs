@@ -10,21 +10,22 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
     {
         private IUserService _userService;
 
-        public UserController(IUserService userService){
-            _userService  = userService;
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
         }
 
         [HttpGet]
-        public IEnumerable<User> GetAll(){
+        public IEnumerable<User> GetAll()
+        {
 
             return _userService.GetAll();
         }
 
         [HttpGet("{userId}")]
-
-        public User GetOne(){
-            return new User("","","","");
+        public User? GetOne(string userId)
+        {
+            return _userService.GetOne(userId);
         }
-
     }
 }
