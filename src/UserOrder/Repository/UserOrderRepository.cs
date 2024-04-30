@@ -24,6 +24,12 @@ public class UserOrderRepository : IUserOrderRepository
 
         return userOrder;
     }
+    public UserOrder? FindOneById(string id)
+    {
+        UserOrder? userOrder = _userOrder.FirstOrDefault(userOrder => userOrder.OrderId == id);
+
+        return userOrder;
+    }
 
 
 
