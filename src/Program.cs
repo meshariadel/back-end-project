@@ -23,6 +23,7 @@ builder.Services.AddScoped<IProductService, productService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
+app.MapControllers(); 
 
 
 app.MapControllers();
@@ -40,6 +41,3 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.Run();
-
-
-// New Comment
