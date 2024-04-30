@@ -3,9 +3,8 @@ using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.User.C
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Abstractions;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.controllers;
-
-
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers(); 
 
 builder.Services.AddControllers();
 // Add services to the container.
@@ -22,6 +21,7 @@ builder.Services.AddScoped<IProductService, productService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
+app.MapControllers(); 
 
 
 app.MapControllers();
@@ -39,6 +39,3 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.Run();
-
-
-// New Comment
