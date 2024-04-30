@@ -19,6 +19,11 @@ public class ProductRepository : IProductRepository
     {
         Product? product = _product.FirstOrDefault(product => product._ProductId == productId);
         return product;
+    }
 
+    public Product CreateOne(Product product)
+    {
+        _product.Add(product);
+        return product;
     }
 }

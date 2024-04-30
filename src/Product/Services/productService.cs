@@ -22,4 +22,9 @@ public class productService : IProductService
     {
         return _productRepository.FindOne(productId);
     }
+    public Product? CreateOne(Product product)
+    {
+        return _productRepository.CreateOne(product);
+    }
+
 }
