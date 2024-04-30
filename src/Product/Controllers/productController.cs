@@ -22,4 +22,17 @@ public class productController : ControllerTemplate
         return _productService.FindOne(productId);
     }
 
+    [HttpPost]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public ActionResult<Product> CreateOne([FromBody] Product product)
+    {
+        if (product is not null)
+        {
+            var createdProduct = _productService.CreateOne(product);
+            return CreatedAtAction(nameof(CreateOne), createdProduct);
+        }
+        return BadRequest();
+    }
+
 }
