@@ -11,7 +11,7 @@ public class productController : ControllerTemplate
         _productService = productService;
     }
     [HttpGet]
-    public List<Product> FindAll()
+    public IEnumerable<Product> FindAll()
     {
         return _productService.FindAll();
 
@@ -23,9 +23,10 @@ public class productController : ControllerTemplate
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public ActionResult<Product> CreateOne([FromBody] Product product)
+    public ActionResult<IEnumerable<Product>> CreateOne([FromBody] Product product)
     {
         if (product is not null)
         {
