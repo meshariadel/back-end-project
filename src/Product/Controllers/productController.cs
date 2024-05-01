@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.User.Controllers;
+using static sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.DTOs.ProductDto;
 
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.controllers;
 public class productController : ControllerTemplate
@@ -17,16 +18,31 @@ public class productController : ControllerTemplate
 
     }
     [HttpGet("{productId}")]
-    public Product? FindOne(string productId)
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult<ProductReadDto?> FindOne(string productId)
     {
-        return _productService.FindOne(productId);
+        if (productId is not null)
+        {
+            var foundProduct = _productService.FindOne(productId);
+            if (foundProduct is not null)
+            {
+
+                return CreatedAtAction(nameof(FindOne), foundProduct);
+            }
+            else
+                return BadRequest();
+
+        }
+        return BadRequest();
     }
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-    public ActionResult<IEnumerable<Product>> CreateOne([FromBody] Product product)
+    public ActionResult<Product> CreateOne([FromBody] Product product)
     {
         if (product is not null)
         {
