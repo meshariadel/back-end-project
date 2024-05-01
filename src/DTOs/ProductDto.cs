@@ -1,5 +1,3 @@
-using System.Drawing;
-using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Entities;
 
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.DTOs
 {

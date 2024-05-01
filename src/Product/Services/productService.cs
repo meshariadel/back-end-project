@@ -17,10 +17,11 @@ public class productService : IProductService
         _config = config;
         _Mapper = mapper;
     }
-    public IEnumerable<Product> FindAll()
+    public IEnumerable<ProductReadDto> FindAll()
     {
-
-        return _productRepository.FindAll();
+        var products = _productRepository.FindAll();
+        var usersRead = products.Select(_Mapper.Map<ProductReadDto>);
+        return usersRead;
     }
 
     public ProductReadDto? FindOne(string product)

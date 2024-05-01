@@ -12,7 +12,7 @@ public class productController : ControllerTemplate
         _productService = productService;
     }
     [HttpGet]
-    public IEnumerable<Product> FindAll()
+    public IEnumerable<ProductReadDto> FindAll()
     {
         return _productService.FindAll();
 
