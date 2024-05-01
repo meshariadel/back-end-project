@@ -1,6 +1,5 @@
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Abstractions;
-using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.User.Controllers;
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers;
 
 
@@ -18,14 +17,14 @@ public class ProductRepository : IProductRepository
     }
     public Product? FindOne(string foundProduct)
     {
-        Product? product = _product.FirstOrDefault(product => product.Name == foundProduct);
+        Product? product = _product.FirstOrDefault(product => product.ProductId == foundProduct);
         return product;
     }
 
-    public IEnumerable<Product> CreateOne(Product product)
+    public Product CreateOne(Product product)
     {
         _product = _product.Append(product);
-        return _product;
+        return product;
     }
 
     public Product UpdateOne(Product updatedProduct)
