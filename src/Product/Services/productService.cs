@@ -42,6 +42,6 @@ public class productService : IProductService
             return _productRepository.UpdateOne(product);
 
         }
-        return null;
+        throw new Exception("Product " + productName + " do not exists");
     }
 }
