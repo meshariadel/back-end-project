@@ -12,19 +12,36 @@ public class productService : IProductService
         _productRepository = productRepository;
 
     }
-    public List<Product> FindAll()
+    public IEnumerable<Product> FindAll()
     {
 
         return _productRepository.FindAll();
     }
 
-    public Product? FindOne(string productId)
+    public Product? FindOne(string product)
     {
-        return _productRepository.FindOne(productId);
+        return _productRepository.FindOne(product);
     }
-    public Product? CreateOne(Product product)
+    public IEnumerable<Product> CreateOne(Product product)
     {
+        Product? foundProduct = _productRepository.FindOne(product.Name);
+
+        if (foundProduct is not null)
+        {
+            throw new Exception("Product " + product.Name + " already exists");
+        }
         return _productRepository.CreateOne(product);
     }
 
+    public Product UpdateOne(string productName, Product updatedProduct)
+    {
+        Product? product = _productRepository.FindOne(productName);
+        if (product is not null)
+        {
+            product.Color = updatedProduct.Color;
+            return _productRepository.UpdateOne(product);
+
+        }
+        throw new Exception("Product " + productName + " do not exists");
+    }
 }
