@@ -1,5 +1,5 @@
 
-namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers;
+namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers{
 public interface IProductService
 {
 
@@ -8,4 +8,5 @@ public interface IProductService
 
     public IEnumerable<Product> CreateOne(Product product);
     public Product UpdateOne(string productName, Product product);
+}
 }

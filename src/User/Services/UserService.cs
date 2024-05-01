@@ -1,34 +1,40 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 
-namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.User.Controllers
+namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class UserService : IUserService
     {
         private IUserRepository _userRepository;
+        private IMapper _mapper;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<UserReadDto> GetAll()
+        {  
+            
+            IEnumerable<UserReadDto> usersReadDto = _mapper.Map<IEnumerable<UserReadDto>>(_userRepository.GetAll());
+            return usersReadDto;
+        }
+
+        public UserReadDto? GetOne(string email)
         {
-            return _userRepository.GetAll();
+            User user = _userRepository.GetOne(email);
+            UserReadDto userReadDto = _mapper.Map<UserReadDto>(user);
+            return userReadDto;
         }
 
-        public User? GetOne(string email)
-        {
-
-            return _userRepository.GetOne(email);
-        }
-
-        public User UpdateOne(string userId, string newName)
+        public UserReadDto UpdateOne(string userId, UserUpdateDto updatedUser)
         {
             User targetUser = _userRepository.GetOne(userId);
-            return _userRepository.UpdateOne(targetUser, newName);
+            User updatedUserDto = _mapper.Map<User>(updatedUser);
+
+            _userRepository.UpdateOne(targetUser, updatedUserDto);
+            UserReadDto updatedUserReadDto = _mapper.Map<UserReadDto>(updatedUserDto);
+            return updatedUserReadDto;
         }
 
         public User CreateOne(User newUser){

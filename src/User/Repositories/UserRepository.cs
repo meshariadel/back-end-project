@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.User.Controllers
+namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class UserRepository : IUserRepository
     {
@@ -23,14 +23,16 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
             return user;
         }
 
-        public User UpdateOne(User targetUser, string newName)
+        public User UpdateOne(User targetUser, User updatedUser)
         {
 
             foreach (var aUser in _users)
             {
                 if (aUser.UserId == targetUser.UserId)
                 {
-                    aUser.FullName = newName;
+                    aUser.FullName = updatedUser.FullName;
+                    aUser.Email = updatedUser.Email;
+                    aUser.Password = updatedUser.Password;
                     return aUser;
                 }
 
