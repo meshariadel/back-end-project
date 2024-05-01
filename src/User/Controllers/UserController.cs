@@ -1,36 +1,40 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
-namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.User.Controllers
+namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class userController : ControllerTemplate
     {
         private IUserService _userService;
+        private IMapper _mapper;
 
-        public userController(IUserService userService)
+        public userController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public IEnumerable<User> GetAll()
+        public IEnumerable<UserReadDto> GetAll()
         {
             return _userService.GetAll();
         }
 
-        [HttpGet("{userId}")]
-        public User? GetOne(string userId)
+        [HttpGet("{email}")]
+        public UserReadDto? GetOne(string email)
         {
-            return _userService.GetOne(userId);
+            return _userService.GetOne(email);
         }
 
         [HttpPatch("userId")]
-        public User UpdateOne(string userId, [FromBody] string newName)
+        public UserReadDto UpdateOne(string userId, [FromBody] UserUpdateDto updatedUser)
         {
-            return _userService.UpdateOne(userId, newName);
+            return _userService.UpdateOne(userId, updatedUser);
+        }
+
+        [HttpPost]
+        public User CreateOne([FromBody]User newUser){
+            return _userService.CreateOne(newUser);
         }
 
 

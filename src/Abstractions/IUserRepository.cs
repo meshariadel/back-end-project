@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.User.Controllers
+namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public interface IUserRepository
     {
@@ -11,7 +11,9 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
 
         public User? GetOne(string userID);
 
-        public User UpdateOne(User newUser, string newName);
+        public User UpdateOne(User targetUser, User updatedUser);
+
+        public User CreateOne(User newUser);
 
     }
 

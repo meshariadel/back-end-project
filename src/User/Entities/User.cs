@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.User.Controllers
+namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class User
     {
@@ -13,13 +8,16 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
         public string FullName { get; set; }
         public string Role { get; set; }
         public string Email { get; set; }
-        public User(string userId, string fullName, string role, string email)
+        public string Password { get; set; }
+        public User(string userId, string fullName, string role, string email, string password)
         {
 
             UserId = userId;
             FullName = fullName;
             Role = role;
             Email = email;
+            Password = password;
+
 
         }
 
