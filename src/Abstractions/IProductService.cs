@@ -7,4 +7,5 @@ public interface IProductService
     public Product? FindOne(string product);
 
     public IEnumerable<Product> CreateOne(Product product);
+    public Product UpdateOne(string productName, Product product);
 }

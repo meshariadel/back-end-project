@@ -33,4 +33,15 @@ public class productService : IProductService
         return _productRepository.CreateOne(product);
     }
 
+    public Product UpdateOne(string productName, Product updatedProduct)
+    {
+        Product? product = _productRepository.FindOne(productName);
+        if (product is not null)
+        {
+            product.Color = updatedProduct.Color;
+            return _productRepository.UpdateOne(product);
+
+        }
+        return null;
+    }
 }

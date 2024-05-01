@@ -36,4 +36,17 @@ public class productController : ControllerTemplate
         return BadRequest();
     }
 
+    [HttpPatch("{productName}")]
+    // [ProducesResponseType(StatusCodes.Status204NoContent)]
+    // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public Product? UpdateOne(string productName, [FromBody] Product product)
+    {
+
+        if (product is not null)
+        {
+            return _productService.UpdateOne(productName, product);
+
+        }
+        return null;
+    }
 }
