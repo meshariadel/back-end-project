@@ -6,25 +6,25 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers;
 public class Product
 {
 
-    public string _ProductId { get; set; }
-    public string _CategoryId { get; } = Guid.NewGuid().ToString();
-    public ProductSize _Size { get; set; }
-    public string? _Color { get; set; }
-    public double _Price { get; set; }
-    public int _Stock { get; set; }
-    public string? _Img { get; set; }
-    public string? _Name { get; set; }
-    public string? _description { get; set; }
+    public string ProductId { get; set; } = Guid.NewGuid().ToString();
+    public string CategoryId { get; set; } = Guid.NewGuid().ToString();
+    public ProductSize Size { get; set; }
+    public string? Color { get; set; }
+    public double Price { get; set; }
+    public int Stock { get; set; }
+    public string? Img { get; set; }
+    public string Name { get; set; }
+    public string? Description { get; set; }
     public Product(string productId, ProductSize size, string color, double price,
-    int stock, string name, string description, string img)
+    int stock, string img, string name, string description)
     {
-        _ProductId = productId;
-        _Size = size;
-        _Color = color;
-        _Price = price;
-        _Stock = stock;
-        _Img = img;
-        _Name = name;
-        _description = description;
+        ProductId = productId;
+        Size = size;
+        Color = color;
+        Price = price;
+        Stock = stock;
+        Img = img;
+        Name = name;
+        Description = description;
     }
 }
