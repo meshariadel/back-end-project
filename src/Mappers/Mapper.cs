@@ -1,4 +1,5 @@
 using AutoMapper;
+
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class Mapper :Profile
@@ -11,7 +12,9 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             CreateMap<UserUpdateDto,UserReadDto>();
             CreateMap<User,UserUpdateDto>();
             CreateMap<UserUpdateDto,User>();
+            CreateMap<Product, ProductReadDto>();
+            CreateMap<ProductReadDto, Product>();
 
         }
     }
-}
+    }
