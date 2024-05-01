@@ -34,5 +34,16 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Se
             return _userOrderRepository.FindOneById(id);
         }
 
+        public UserOrder? UpdateOne(string id, UserOrder.OrderStatus status)
+        {
+            UserOrder? userOrder = _userOrderRepository.FindOneById(id);
+            if (userOrder is not null)
+            {
+                userOrder.Status = status;
+                return _userOrderRepository.UpdateOne(userOrder);
+
+            }
+            return null;
+        }
     }
 }

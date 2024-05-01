@@ -31,6 +31,23 @@ public class UserOrderRepository : IUserOrderRepository
         return userOrder;
     }
 
+    public UserOrder? UpdateOne(UserOrder updateUserOrder)
+    {
+        var userOrders = _userOrder.Select(userOrder =>
+        {
+            if (userOrder.OrderId == updateUserOrder.OrderId)
+            {
+                return updateUserOrder;
+            }
+            return userOrder;
+        });
+        _userOrder = userOrders.ToList();
+        return updateUserOrder;
+    }
+
+
+
+
 
 
 }

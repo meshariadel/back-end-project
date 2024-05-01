@@ -28,7 +28,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Co
         {
             return _userOrderService.FindOneById(id);
         }
-        
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -42,6 +42,15 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Co
                 return CreatedAtAction(nameof(CreateOne), createdUserOrder);
             }
             return BadRequest();
+
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public ActionResult<UserOrder> UpdateOne(string id, [FromBody] UserOrder.OrderStatus status)
+        {
+            var updateStatusOrder = _userOrderService.UpdateOne(id, status);
+            return CreatedAtAction(nameof(UpdateOne), updateStatusOrder);
 
         }
 
