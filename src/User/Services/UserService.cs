@@ -19,16 +19,21 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
             return _userRepository.GetAll();
         }
 
-        public User? GetOne(string userId)
+        public User? GetOne(string email)
         {
 
-            return _userRepository.GetOne(userId);
+            return _userRepository.GetOne(email);
         }
 
         public User UpdateOne(string userId, string newName)
         {
             User targetUser = _userRepository.GetOne(userId);
             return _userRepository.UpdateOne(targetUser, newName);
+        }
+
+        public User CreateOne(User newUser){
+            
+            return _userRepository.CreateOne(newUser);
         }
     }
 }

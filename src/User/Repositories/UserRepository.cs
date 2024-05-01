@@ -16,10 +16,10 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
             return _users;
         }
 
-        public User? GetOne(string userId)
+        public User? GetOne(string email)
         {
 
-            User? user = _users.FirstOrDefault(aUser => aUser.UserId == userId);
+            User? user = _users.FirstOrDefault(aUser => aUser.Email == email);
             return user;
         }
 
@@ -37,6 +37,12 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Us
 
             }
             return targetUser;
+        }
+
+        public User CreateOne(User newUser){
+
+            _users.Append(newUser);
+            return newUser;
         }
     }
 }
