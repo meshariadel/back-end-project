@@ -1,18 +1,17 @@
-
-using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Entites;
-namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Databases;
-
-
-
-public class DatabaseContext
+namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
-    public List<OrderItem> OrderItem;
 
-    public DatabaseContext()
+
+
+    public class DatabaseContext
     {
+        public List<OrderItem> OrderItem;
 
-        OrderItem = [
-            new OrderItem(1,100),
+        public DatabaseContext()
+        {
+
+            OrderItem = [
+                new OrderItem(1,100),
 
             new OrderItem(2,200),
 
@@ -23,6 +22,7 @@ public class DatabaseContext
 
 
         ];
-    }
+        }
 
+    }
 }

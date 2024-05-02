@@ -1,10 +1,6 @@
 using AutoMapper;
-
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
-
-
-
     public class productService : IProductService
     {
         private IProductRepository _productRepository;
@@ -60,6 +56,5 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             }
             throw new Exception("Product " + productName + " do not exists");
         }
-
     }
 }

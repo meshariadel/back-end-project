@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 using Microsoft.EntityFrameworkCore;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Entities;
+=======
+>>>>>>> 5d04b37a6f7392ad42bc518d6e9190822d193017
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class DatabaseContext : DbContext
