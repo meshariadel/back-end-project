@@ -44,5 +44,11 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         }
 
+        public OrderItem? FindOne(string foundOrderItem)
+        {
+            OrderItem? order = _orderitems.FirstOrDefault(o => o.OrderId == foundOrderItem);
+            return order;
+        }
+
     }
 }

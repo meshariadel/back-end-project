@@ -1,11 +1,19 @@
+using AutoMapper;
+
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class OrderItemService : IOrderItemService
     {
         private IOrderItemRepository _orderItemRepository;
-        public OrderItemService(IOrderItemRepository orderItemRepository)
+
+        private IConfiguration _config;
+
+        private IMapper _Mapper;
+        public OrderItemService(IOrderItemRepository orderItemRepository, IConfiguration config, IMapper mapper)
         {
             _orderItemRepository = orderItemRepository;
+            _config = config;
+            _Mapper = mapper;
         }
 
         public List<OrderItem> FindAll()
@@ -25,5 +33,22 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         {
             return _orderItemRepository.DeleteAll();
         }
+
+
+        public OrderItem? FindOne(string order)
+        {
+            var orderId = _orderItemRepository.FindOne(order);
+
+            if (orderId is not null)
+            {
+                var orderRead = _Mapper.Map<OrderItem>(orderId);
+                return orderRead;
+            }
+            throw new Exception("Order Id " + orderId + " is not found ");
+        }
     }
 }
+
+//getall
+//getone
+//createone
