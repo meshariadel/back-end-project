@@ -1,12 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class UserOrderRepository : IUserOrderRepository
     {
-        private IEnumerable<UserOrder> _userOrder;
-
-        public UserOrderRepository()
+        private DbSet<UserOrder> _userOrder;
+        private UserOrderDatabaseContext _userDataBaseContext;
+        public UserOrderRepository(UserOrderDatabaseContext userOrderDatabaseContext)
         {
-            _userOrder = new UserOrderDatabaseContext().userOrder;
+            _userOrder = userOrderDatabaseContext.userOrder;
+            _userDataBaseContext = userOrderDatabaseContext;
         }
         public IEnumerable<UserOrder> FindAll()
         {
@@ -14,7 +17,8 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
         public IEnumerable<UserOrder> CreateOne(UserOrder userOrder)
         {
-            _userOrder = _userOrder.Append(userOrder);
+            _userOrder.Add(userOrder);
+            _userDataBaseContext.SaveChanges();
             return _userOrder;
         }
         public UserOrder? FindOne(UserOrder NewUserOrder)
@@ -27,26 +31,13 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         {
             UserOrder? userOrder = _userOrder.FirstOrDefault(userOrder => userOrder.OrderId == id);
 
-        return userOrder;
-    }
-
-    public UserOrder? UpdateOne(UserOrder updateUserOrder)
-    {
-        var userOrders = _userOrder.Select(userOrder =>
-        {
-            if (userOrder.OrderId == updateUserOrder.OrderId)
-            {
-                return updateUserOrder;
-            }
             return userOrder;
-        });
-        _userOrder = userOrders.ToList();
-        return updateUserOrder;
+        }
+        public UserOrder? UpdateOne(UserOrder updateUserOrder)
+        {
+            _userOrder.Update(updateUserOrder);
+            _userDataBaseContext.SaveChanges();
+            return updateUserOrder;
+        }
     }
-
-
-
-
-
-
 }

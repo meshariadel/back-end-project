@@ -1,7 +1,6 @@
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
-    public class ProductDto
-    {
+
 
         public class ProductReadDto
         {
@@ -21,4 +20,3 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
 
     }
-}

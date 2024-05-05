@@ -38,7 +38,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         }
 
-        [HttpPut("{id}")]
+        [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public ActionResult<UserOrder> UpdateOne(string id, [FromBody] UserOrder.OrderStatus status)
         {
