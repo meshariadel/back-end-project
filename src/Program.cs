@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(Program).Assembly); // Add Mapper in build 
+builder.Services.AddDbContext<DatabaseContext>();
 
 
 // Add services to the container.
@@ -23,7 +24,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 
 var app = builder.Build();
-app.MapControllers(); 
+app.MapControllers();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
