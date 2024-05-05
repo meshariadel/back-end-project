@@ -26,10 +26,10 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return _userService.GetOne(email);
         }
 
-        [HttpPatch("userId")]
-        public UserReadDto UpdateOne(string userId, [FromBody] UserUpdateDto updatedUser)
+        [HttpPatch("{userEmail}")]
+        public UserReadDto UpdateOne(string userEmail, [FromBody] UserUpdateDto updatedUser)
         {
-            return _userService.UpdateOne(userId, updatedUser);
+            return _userService.UpdateOne(userEmail, updatedUser);
         }
 
         [HttpPost]

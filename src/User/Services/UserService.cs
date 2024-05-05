@@ -27,12 +27,12 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return userReadDto;
         }
 
-        public UserReadDto UpdateOne(string userId, UserUpdateDto updatedUser)
+        public UserReadDto UpdateOne(string userEmail, UserUpdateDto updatedUser)
         {
-            User targetUser = _userRepository.GetOne(userId);
+            User? targetUser = _userRepository.GetOne(userEmail);
             User updatedUserDto = _mapper.Map<User>(updatedUser);
-
-            _userRepository.UpdateOne(targetUser, updatedUserDto);
+            
+            updatedUserDto = _userRepository.UpdateOne(targetUser, updatedUserDto);
             UserReadDto updatedUserReadDto = _mapper.Map<UserReadDto>(updatedUserDto);
             return updatedUserReadDto;
         }
