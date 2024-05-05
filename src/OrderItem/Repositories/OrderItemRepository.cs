@@ -5,9 +5,9 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
     public class OrderItemRepository : IOrderItemRepository
     {
         private List<OrderItem> _orderitems;
-        public OrderItemRepository()
+        public OrderItemRepository(DatabaseContext databaseContext)
         {
-            _orderitems = new OrderItemDatabaseContext().OrderItem;
+            _orderitems = databaseContext.OrderItem;
         }
 
         public List<OrderItem> FindAll()
@@ -44,6 +44,18 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
             return _orderitems;
 
+        }
+
+        public OrderItem? FindOne(string foundOrderItem)
+        {
+            OrderItem? order = _orderitems.FirstOrDefault(o => o.OrderId == foundOrderItem);
+            return order;
+        }
+
+        public OrderItem CreateOne(OrderItem orderitem)
+        {
+            _orderitems = (List<OrderItem>)_orderitems.Append(orderitem);
+            return orderitem;
         }
 
     }

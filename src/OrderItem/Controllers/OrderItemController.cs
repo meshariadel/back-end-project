@@ -4,39 +4,59 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
     public class OrderItemController : ControllerTemplate
     {
-        [HttpGet]
+        private IOrderItemService _orderItemService;
+        public OrderItemController(IOrderItemService orderItemService)
+        {
+            _orderItemService = orderItemService;
+        }
 
+        [HttpGet("findall")]
         public List<OrderItem> FindAll()
         {
-            var controllFindAll = new OrderItemService();
 
-            return controllFindAll.FindAll();
+            return _orderItemService.FindAll();
         }
 
-        [HttpPost("updateone")]
+        /* [HttpPost("updateone")]
 
-        public OrderItem? UpdateOne(string orderItemId, int newQuantity, decimal newTotalPrice)
+         public OrderItem? UpdateOne(string orderItemId, int newQuantity, decimal newTotalPrice)
 
+         {
+             return _orderItemService.UpdateOne(orderItemId, newQuantity, newTotalPrice);
+         }
+
+
+         [HttpGet("delete")]
+
+         public List<OrderItem> DeleteAll()
+         {
+             return _orderItemService.DeleteAll();
+         }
+ */
+        [HttpGet("findone")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<OrderItem> FindOne(string OrderId)
         {
+            if (OrderId is not null)
+            {
+                var foundOrderItem = _orderItemService.FindOne(OrderId);
+                if (foundOrderItem is not null)
+                {
 
-            var controllUpdateOne = new OrderItemService();
+                    return CreatedAtAction(nameof(FindOne), foundOrderItem);
+                }
+                else
+                    return BadRequest();
 
-            return controllUpdateOne.UpdateOne(orderItemId, newQuantity, newTotalPrice);
+            }
+            return BadRequest();
         }
 
-
-        [HttpGet("delete")]
-
-        public List<OrderItem> DeleteAll()
-        {
-            var contoller = new OrderItemService();
-
-            return contoller.DeleteAll();
-
-
-        }
 
 
     }
 
 }
+
