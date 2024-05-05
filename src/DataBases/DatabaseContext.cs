@@ -8,6 +8,8 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         public IEnumerable<User> Users;
 
+        public List<OrderItem> OrderItem;
+
         private IConfiguration _config;
         public DatabaseContext(IConfiguration config)
         {
@@ -18,6 +20,12 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
                 new User("3","Max Holloway","User","MaxHolloway@gmail.com","1234"),
                 new User("4","Dana White","Admin","DanaWhite@gmail.com","1234")
            ];
+            OrderItem = [
+                 new OrderItem(1,100),
+                new OrderItem(2,200),
+                new OrderItem(6,7700),
+                new OrderItem(3,1300)
+            ];
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
