@@ -1,11 +1,8 @@
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
-    public class ProductDto
+    public class ProductReadDto
     {
-
-        public class ProductReadDto
-        {
-            public string ProductId { get; set; }
+             public string ProductId { get; set; }
 
             public string CategoryId { get; set; }
             public string? Name { get; set; }
@@ -18,7 +15,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
             public string? Color { get; set; }
 
-        }
+        
 
     }
 }
