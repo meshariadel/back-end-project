@@ -11,7 +11,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
 
         [HttpGet("findall")]
-        public List<OrderItem> FindAll()
+        public IEnumerable<OrderItem> FindAll()
         {
 
             return _orderItemService.FindAll();

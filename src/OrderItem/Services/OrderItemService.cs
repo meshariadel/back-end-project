@@ -16,7 +16,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             _Mapper = mapper;
         }
 
-        public List<OrderItem> FindAll()
+        public IEnumerable<OrderItem> FindAll()
         {
 
             return _orderItemRepository.FindAll();
@@ -29,7 +29,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return _orderItemRepository.UpdateOne(orderItemId, newQuantity, newTotalPrice);
         }
 
-        public List<OrderItem> DeleteAll()
+        public IEnumerable<OrderItem> DeleteAll()
         {
             return _orderItemRepository.DeleteAll();
         }

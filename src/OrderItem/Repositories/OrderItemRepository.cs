@@ -1,14 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+
+
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class OrderItemRepository : IOrderItemRepository
     {
-        private List<OrderItem> _orderitems;
+
+
+        private DbSet<OrderItem> _orderitems;
         public OrderItemRepository(DatabaseContext databaseContext)
         {
             _orderitems = databaseContext.OrderItem;
         }
 
-        public List<OrderItem> FindAll()
+        public IEnumerable<OrderItem> FindAll()
         {
             return _orderitems;
         }
@@ -34,15 +39,18 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
 
 
-        public List<OrderItem> DeleteAll()
+        public IEnumerable<OrderItem> DeleteAll()
         {
-
-
-            _orderitems.Clear();
+            foreach (var item in _orderitems.ToList())
+            {
+                _orderitems.Remove(item);
+            }
 
             return _orderitems;
 
         }
+
+
 
         public OrderItem? FindOne(string foundOrderItem)
         {
@@ -52,7 +60,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         public OrderItem CreateOne(OrderItem orderitem)
         {
-            _orderitems = (List<OrderItem>)_orderitems.Append(orderitem);
+            _orderitems = (DbSet<OrderItem>)_orderitems.Append(orderitem);
             return orderitem;
         }
 
