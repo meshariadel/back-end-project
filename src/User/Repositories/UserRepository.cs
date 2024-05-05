@@ -9,7 +9,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         public UserRepository(DatabaseContext databaseContext)
         {
             _users = databaseContext.Users;
-            
+
         }
 
         public IEnumerable<User> GetAll()
@@ -17,10 +17,10 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return _users;
         }
 
-        public User? GetOne(string email)
+        public User? GetOne(string userId)
         {
 
-            User? user = _users.FirstOrDefault(aUser => aUser.Email == email);
+            User? user = _users.FirstOrDefault(aUser => aUser.UserId == userId);
             return user;
         }
 
@@ -42,7 +42,8 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return targetUser;
         }
 
-        public User CreateOne(User newUser){
+        public User CreateOne(User newUser)
+        {
 
             _users.Append(newUser);
             return newUser;
