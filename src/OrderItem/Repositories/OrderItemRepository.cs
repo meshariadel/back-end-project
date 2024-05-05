@@ -50,5 +50,11 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return order;
         }
 
+        public OrderItem CreateOne(OrderItem orderitem)
+        {
+            _orderitems = (List<OrderItem>)_orderitems.Append(orderitem);
+            return orderitem;
+        }
+
     }
 }

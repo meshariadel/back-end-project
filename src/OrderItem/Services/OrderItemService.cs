@@ -46,9 +46,20 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             }
             throw new Exception("Order Id " + orderId + " is not found ");
         }
+
+
+
+        public OrderItem CreateOne(OrderItem orderItem)
+        {
+            OrderItem? foundOrderItem = _orderItemRepository.FindOne(orderItem.OrderItemId);
+
+            if (foundOrderItem is not null)
+            {
+                throw new Exception("OrderItem " + orderItem.OrderItemId + " already exists");
+            }
+            return _orderItemRepository.CreateOne(orderItem);
+        }
+
     }
 }
 
-//getall
-//getone
-//createone

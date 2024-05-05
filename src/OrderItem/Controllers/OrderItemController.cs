@@ -10,7 +10,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             _orderItemService = orderItemService;
         }
 
-        [HttpGet]
+        [HttpGet("findall")]
         public List<OrderItem> FindAll()
         {
 
@@ -33,7 +33,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
              return _orderItemService.DeleteAll();
          }
  */
-        [HttpGet("[orderId]")]
+        [HttpGet("findone")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
