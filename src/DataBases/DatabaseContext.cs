@@ -3,7 +3,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class DatabaseContext : DbContext
     {
-        public DbSet<UserOrder> UserOrder { get; set; }
+        public DbSet<Order> Order { get; set; }
         public DbSet<Product> Products { get; set; }
 
         public IEnumerable<User> Users;
