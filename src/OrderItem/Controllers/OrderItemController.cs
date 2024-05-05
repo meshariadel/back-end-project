@@ -4,13 +4,17 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
     public class OrderItemController : ControllerTemplate
     {
-        [HttpGet]
+        private IOrderItemService _orderItemService;
+        public OrderItemController(IOrderItemService orderItemService)
+        {
+            _orderItemService = orderItemService;
+        }
 
+        [HttpGet]
         public List<OrderItem> FindAll()
         {
-            var controllFindAll = new OrderItemService();
 
-            return controllFindAll.FindAll();
+            return _orderItemService.FindAll();
         }
 
         [HttpPost("updateone")]
@@ -18,10 +22,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         public OrderItem? UpdateOne(string orderItemId, int newQuantity, decimal newTotalPrice)
 
         {
-
-            var controllUpdateOne = new OrderItemService();
-
-            return controllUpdateOne.UpdateOne(orderItemId, newQuantity, newTotalPrice);
+            return _orderItemService.UpdateOne(orderItemId, newQuantity, newTotalPrice);
         }
 
 
@@ -29,11 +30,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         public List<OrderItem> DeleteAll()
         {
-            var contoller = new OrderItemService();
-
-            return contoller.DeleteAll();
-
-
+            return _orderItemService.DeleteAll();
         }
 
 

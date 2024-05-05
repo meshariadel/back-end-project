@@ -1,12 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class UserOrderRepository : IUserOrderRepository
     {
-        private IEnumerable<UserOrder> _userOrder;
-
-        public UserOrderRepository()
+        private DbSet<UserOrder> _userOrder;
+        private DatabaseContext _dbContext;
+        public UserOrderRepository(DatabaseContext dbContext)
         {
-            _userOrder = new UserOrderDatabaseContext().userOrder;
+            _userOrder = dbContext.UserOrder;
+            _dbContext = dbContext;
         }
         public IEnumerable<UserOrder> FindAll()
         {
@@ -14,7 +17,8 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
         public IEnumerable<UserOrder> CreateOne(UserOrder userOrder)
         {
-            _userOrder = _userOrder.Append(userOrder);
+            _userOrder.Add(userOrder);
+            _dbContext.SaveChanges();
             return _userOrder;
         }
         public UserOrder? FindOne(UserOrder NewUserOrder)
@@ -29,20 +33,11 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
             return userOrder;
         }
-
         public UserOrder? UpdateOne(UserOrder updateUserOrder)
         {
-            var userOrders = _userOrder.Select(userOrder =>
-            {
-                if (userOrder.OrderId == updateUserOrder.OrderId)
-                {
-                    return updateUserOrder;
-                }
-                return userOrder;
-            });
-            _userOrder = userOrders.ToList();
+            _userOrder.Update(updateUserOrder);
+            _dbContext.SaveChanges();
             return updateUserOrder;
         }
-
     }
 }

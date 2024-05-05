@@ -3,9 +3,9 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
     public class OrderItemRepository : IOrderItemRepository
     {
         private List<OrderItem> _orderitems;
-        public OrderItemRepository()
+        public OrderItemRepository(DatabaseContext databaseContext)
         {
-            _orderitems = new DatabaseContext().OrderItem;
+            _orderitems = databaseContext.OrderItem;
         }
 
         public List<OrderItem> FindAll()
