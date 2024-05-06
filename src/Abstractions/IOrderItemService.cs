@@ -5,9 +5,9 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
 
         public IEnumerable<OrderItem> FindAll();
-        public OrderItem? UpdateOne(string orderItemId, int newQuantity, decimal newTotalPrice);
-        public IEnumerable<OrderItem> DeleteAll();
-        public OrderItem? FindOne(string order);
+        public OrderItem? UpdateOne(Guid orderItemId, int newQuantity, decimal newTotalPrice);
+        public void DeleteAll();
+        public OrderItem? FindOne(Guid orderId);
         public OrderItem CreateOne(OrderItem orderItem);
 
     }

@@ -22,20 +22,20 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return _orderItemRepository.FindAll();
         }
 
-        public OrderItem? UpdateOne(string orderItemId, int newQuantity, decimal newTotalPrice)
+        public OrderItem? UpdateOne(Guid orderItemId, int newQuantity, decimal newTotalPrice)
 
         {
 
             return _orderItemRepository.UpdateOne(orderItemId, newQuantity, newTotalPrice);
         }
 
-        public IEnumerable<OrderItem> DeleteAll()
+        public void DeleteAll()
         {
-            return _orderItemRepository.DeleteAll();
+            _orderItemRepository.DeleteAll();
         }
 
 
-        public OrderItem? FindOne(string order)
+        public OrderItem? FindOne(Guid order)
         {
             var orderId = _orderItemRepository.FindOne(order);
 
@@ -51,11 +51,11 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         public OrderItem CreateOne(OrderItem orderItem)
         {
-            OrderItem? foundOrderItem = _orderItemRepository.FindOne(orderItem.OrderItemId);
+            OrderItem? foundOrderItem = _orderItemRepository.FindOne(orderItem.Id);
 
             if (foundOrderItem is not null)
             {
-                throw new Exception("OrderItem " + orderItem.OrderItemId + " already exists");
+                throw new Exception("OrderItem " + orderItem.Id + " already exists");
             }
             return _orderItemRepository.CreateOne(orderItem);
         }

@@ -4,22 +4,14 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
     {
 
 
-        public string OrderItemId { get; } = Guid.NewGuid().ToString();
-        public string OrderId { get; set; } = Guid.NewGuid().ToString();
-
-        public string ProductId { get; set; } = Guid.NewGuid().ToString();
-
+        public Guid Id { get; set; }
+        public Guid OrderId { get; set; }
+        public UserOrder UserOrder { get; set; }
+        public string ProductId { get; set; }
         public int Quantity { get; set; }
 
         public decimal TotalPirce { get; set; }
-        public OrderItem(int quantity, decimal totalPirce)
-        {
 
-            Quantity = quantity;
-
-            TotalPirce = totalPirce;
-
-        }
 
 
     }

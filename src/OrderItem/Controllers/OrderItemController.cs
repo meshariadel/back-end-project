@@ -10,7 +10,8 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             _orderItemService = orderItemService;
         }
 
-        [HttpGet("findall")]
+        [HttpGet]
+
         public IEnumerable<OrderItem> FindAll()
         {
 
@@ -33,25 +34,22 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
              return _orderItemService.DeleteAll();
          }
  */
-        [HttpGet("findone")]
+
+        [HttpGet("{orderItemId}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<OrderItem> FindOne(string OrderId)
+        public ActionResult<OrderItem> FindOne(Guid orderItemId)
         {
-            if (OrderId is not null)
+
+            var foundOrderItem = _orderItemService.FindOne(orderItemId);
+            if (foundOrderItem is not null)
             {
-                var foundOrderItem = _orderItemService.FindOne(OrderId);
-                if (foundOrderItem is not null)
-                {
 
-                    return CreatedAtAction(nameof(FindOne), foundOrderItem);
-                }
-                else
-                    return BadRequest();
-
+                return CreatedAtAction(nameof(FindOne), foundOrderItem);
             }
-            return BadRequest();
+            else
+                return BadRequest();
         }
 
 

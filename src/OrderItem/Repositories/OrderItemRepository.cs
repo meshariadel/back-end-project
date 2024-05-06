@@ -5,12 +5,16 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class OrderItemRepository : IOrderItemRepository
     {
+        private DatabaseContext _dbContext;
+
+        private IEnumerable<OrderItem> _orderitems;
 
 
-        private DbSet<OrderItem> _orderitems;
         public OrderItemRepository(DatabaseContext databaseContext)
         {
             _orderitems = databaseContext.OrderItem;
+            _dbContext = databaseContext;
+
         }
 
         public IEnumerable<OrderItem> FindAll()
@@ -19,10 +23,10 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
 
 
-        public OrderItem? UpdateOne(string orderItemId, int newQuantity, decimal newTotalPrice)
+        public OrderItem? UpdateOne(Guid orderItemId, int newQuantity, decimal newTotalPrice)
         {
 
-            OrderItem? itemToUpdate = _orderitems.FirstOrDefault(item => item.OrderItemId == orderItemId);
+            OrderItem? itemToUpdate = _orderitems.FirstOrDefault(item => item.Id == orderItemId);
             if (itemToUpdate != null)
             {
                 // Update properties of the found item
@@ -39,22 +43,21 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
 
 
-        public IEnumerable<OrderItem> DeleteAll()
+        public void DeleteAll()
         {
-            foreach (var item in _orderitems.ToList())
-            {
-                _orderitems.Remove(item);
-            }
-
-            return _orderitems;
-
+            _dbContext.OrderItem.RemoveRange(_orderitems);
+            _dbContext.SaveChanges();
         }
 
 
 
-        public OrderItem? FindOne(string foundOrderItem)
+
+
+
+
+        public OrderItem? FindOne(Guid foundOrderItem)
         {
-            OrderItem? order = _orderitems.FirstOrDefault(o => o.OrderId == foundOrderItem);
+            OrderItem? order = _orderitems.FirstOrDefault(o => o.Id == foundOrderItem);
             return order;
         }
 
