@@ -10,6 +10,9 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         public DateTime DeliveryAt { get; set; }
         public OrderStatus Status { get; set; }
 
+        // public  IEnumerable<OrderItem> { get; set; }
+        // inside Order, there will be an Ienumberable<OrderItem> 
+
         public enum OrderStatus
         {
             Processing,
