@@ -20,6 +20,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return usersReadDto;
         }
 
+
         public UserReadDto? GetOne(Guid userId)
         {
             User user = _userRepository.GetOne(userId);
@@ -27,7 +28,9 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return userReadDto;
         }
 
+
         public UserReadDto UpdateOne(Guid userId, UserUpdateDto updatedUser)
+
         {
             User? targetUser = _userRepository.GetOne(userId);
             User updatedUserDto = _mapper.Map<User>(updatedUser);
@@ -37,6 +40,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return updatedUserReadDto;
         }
 
+
         public UserReadDto CreateOne(UserCreateDto newUser)
         {
 
@@ -44,6 +48,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             userCreateDto = _userRepository.CreateOne(userCreateDto);
             UserReadDto userReadDto = _mapper.Map<UserReadDto>(userCreateDto);
             return userReadDto;
+
         }
     }
 }
