@@ -27,12 +27,14 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
 
         [HttpPatch("{userId}")]
+
         public UserReadDto UpdateOne(Guid userId, [FromBody] UserUpdateDto updatedUser)
         {
             return _userService.UpdateOne(userId, updatedUser);
         }
 
         [HttpPost]
+
         public UserReadDto CreateOne([FromBody] UserCreateDto newUser)
         {
             return _userService.CreateOne(newUser);

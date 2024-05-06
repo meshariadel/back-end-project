@@ -3,23 +3,19 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class DatabaseContext : DbContext
     {
-        public DbSet<UserOrder> UserOrder { get; set; }
+        public DbSet<Order> Order { get; set; }
         public DbSet<Product> Product { get; set; }
 
         public DbSet<User> User { get; set; }
 
-        public List<OrderItem> OrderItem;
+        public DbSet<OrderItem> OrderItem { get; set; }
+
 
         private IConfiguration _config;
         public DatabaseContext(IConfiguration config)
         {
             _config = config;
-            OrderItem = [
-                 new OrderItem(1,100),
-                new OrderItem(2,200),
-                new OrderItem(6,7700),
-                new OrderItem(3,1300)
-            ];
+
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
