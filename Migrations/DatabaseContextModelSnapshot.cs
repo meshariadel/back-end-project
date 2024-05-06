@@ -22,6 +22,7 @@ namespace Backend.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+
             modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Product", b =>
                 {
                     b.Property<string>("ProductId")
@@ -63,78 +64,7 @@ namespace Backend.Migrations
                         .HasColumnName("stock");
 
                     b.HasKey("ProductId")
-                        .HasName("pk_product");
 
-                    b.ToTable("product", (string)null);
-                });
-
-            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.User", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("email");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("full_name");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("password");
-
-                    b.Property<string>("Role")
-                        .HasColumnType("text")
-                        .HasColumnName("role");
-
-                    b.HasKey("UserId")
-                        .HasName("pk_user");
-
-                    b.ToTable("user", (string)null);
-                });
-
-            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.UserOrder", b =>
-                {
-                    b.Property<string>("AddressId")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("address_id");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<DateTime>("DeliveryAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("delivery_at");
-
-                    b.Property<string>("OrderId")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("order_id");
-
-                    b.Property<string>("PaymentId")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("payment_id");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("integer")
-                        .HasColumnName("status");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("user_id");
-
-                    b.ToTable("user_order", (string)null);
                 });
 #pragma warning restore 612, 618
         }
