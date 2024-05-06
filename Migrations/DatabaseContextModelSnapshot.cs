@@ -22,42 +22,6 @@ namespace Backend.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Order", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<Guid>("AddressId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("address_id");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<DateTime>("DeliveryAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("delivery_at");
-
-                    b.Property<Guid>("PaymentId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("payment_id");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("integer")
-                        .HasColumnName("status");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("Id")
-                        .HasName("pk_order");
-
-                    b.ToTable("order", (string)null);
-                });
 
             modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Product", b =>
                 {
@@ -100,9 +64,7 @@ namespace Backend.Migrations
                         .HasColumnName("stock");
 
                     b.HasKey("ProductId")
-                        .HasName("pk_products");
 
-                    b.ToTable("products", (string)null);
                 });
 #pragma warning restore 612, 618
         }
