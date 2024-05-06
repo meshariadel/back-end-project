@@ -1,15 +1,17 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class UserRepository : IUserRepository
     {
-        private IEnumerable<User> _users;
+        private DbSet<User> _users;
+        private DatabaseContext _databasecontext;
 
         public UserRepository(DatabaseContext databaseContext)
         {
-            _users = databaseContext.Users;
-
+            _users = databaseContext.User;
+            _databasecontext = databaseContext;
         }
 
         public IEnumerable<User> GetAll()
@@ -17,7 +19,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return _users;
         }
 
-        public User? GetOne(string userId)
+        public User? GetOne(Guid userId)
         {
 
             User? user = _users.FirstOrDefault(aUser => aUser.UserId == userId);
@@ -45,7 +47,8 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         public User CreateOne(User newUser)
         {
 
-            _users.Append(newUser);
+            _users.Add(newUser);
+            _databasecontext.SaveChanges();
             return newUser;
         }
     }
