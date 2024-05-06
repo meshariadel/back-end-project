@@ -21,19 +21,19 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
 
         [HttpGet("{userId}")]
-        public UserReadDto? GetOne(string userId)
+        public UserReadDto? GetOne(Guid userId)
         {
             return _userService.GetOne(userId);
         }
 
         [HttpPatch("{userId}")]
-        public UserReadDto UpdateOne(string userId, [FromBody] UserUpdateDto updatedUser)
+        public UserReadDto UpdateOne(Guid userId, [FromBody] UserUpdateDto updatedUser)
         {
             return _userService.UpdateOne(userId, updatedUser);
         }
 
         [HttpPost]
-        public User CreateOne([FromBody] User newUser)
+        public UserReadDto CreateOne([FromBody] UserCreateDto newUser)
         {
             return _userService.CreateOne(newUser);
         }

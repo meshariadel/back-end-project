@@ -6,7 +6,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         public ProductRepository(DatabaseContext databaseContext)
         {
-            _product = databaseContext.Products;
+            _product = databaseContext.Product;
         }
         public IEnumerable<Product> FindAll()
         {

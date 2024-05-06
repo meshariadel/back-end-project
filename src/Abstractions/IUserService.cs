@@ -4,9 +4,9 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
     {
         public IEnumerable<UserReadDto> GetAll();
 
-        public UserReadDto? GetOne(string userId);
+        public UserReadDto? GetOne(Guid userId);
 
-        public UserReadDto UpdateOne(string userId, UserUpdateDto updatedUser);
-        public User CreateOne(User newUser);
+        public UserReadDto UpdateOne(Guid userId, UserUpdateDto updatedUser);
+        public UserReadDto CreateOne(UserCreateDto newUser);
     }
 }
