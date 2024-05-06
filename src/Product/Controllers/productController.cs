@@ -19,21 +19,16 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<ProductReadDto?> FindOne(string productId)
+        public ActionResult<ProductReadDto?> FindOne(Guid productId)
         {
-            if (productId is not null)
+
+            var foundProduct = _productService.FindOne(productId);
+            if (foundProduct is not null)
             {
-                var foundProduct = _productService.FindOne(productId);
-                if (foundProduct is not null)
-                {
-
-                    return CreatedAtAction(nameof(FindOne), foundProduct);
-                }
-                else
-                    return BadRequest();
-
+                return CreatedAtAction(nameof(FindOne), foundProduct);
             }
-            return BadRequest();
+            else
+                return BadRequest();
         }
 
         [HttpPost]
@@ -53,12 +48,12 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         [HttpPatch("{productName}")]
         // [ProducesResponseType(StatusCodes.Status204NoContent)]
         // [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public Product? UpdateOne(string productName, [FromBody] Product product)
+        public Product? UpdateOne(Guid productId, [FromBody] Product product)
         {
 
             if (product is not null)
             {
-                return _productService.UpdateOne(productName, product);
+                return _productService.UpdateOne(productId, product);
 
             }
             return null;
