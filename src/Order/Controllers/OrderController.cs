@@ -40,7 +40,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public ActionResult<Order> UpdateOne(Guid id, [FromBody] Order.OrderStatus status)
+        public ActionResult<OrderReadDto> UpdateOne(Guid id, [FromBody] Order.OrderStatus status)
         {
             var updateStatusOrder = _orderService.UpdateOne(id, status);
             return CreatedAtAction(nameof(UpdateOne), updateStatusOrder);
