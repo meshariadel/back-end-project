@@ -58,5 +58,12 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             }
             return null;
         }
+        [HttpDelete(":productId")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public ActionResult DeleteOne(Guid productId)
+        {
+            _productService.DeleteOne(productId);
+            return NoContent();
+        }
     }
 }

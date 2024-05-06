@@ -46,12 +46,13 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             throw new Exception("Product " + productId + " do not exists");
         }
 
-        public bool DeleteOne(Guid id)
+        public bool DeleteOne(Guid Id)
         {
 
-            Product? product = _productRepository.FindOne(id);
-            _productRepository.DeleteOne(id);
-            throw new NotImplementedException();
+            Product? deleteProduct = _productRepository.FindOne(Id);
+            if (deleteProduct is null) return false;
+            _productRepository.DeleteOne(deleteProduct);
+            return true;
         }
 
         public ProductReadDto? FindOne(Guid product)

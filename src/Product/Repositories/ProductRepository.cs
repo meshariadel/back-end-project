@@ -44,11 +44,14 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
             return updatedProduct;
         }
-        public bool DeleteOne(Guid productId)
+        public bool DeleteOne(Product product)
         {
-            throw new NotImplementedException();
+            _dbContext.Product.Remove(product);
+            _dbContext.SaveChanges();
+            return true;
         }
 
-
     }
+
+
 }

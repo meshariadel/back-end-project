@@ -10,7 +10,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         public Product UpdateOne(Product updatedProduct);
 
-        public bool DeleteOne(Guid productId);
+        public bool DeleteOne(Product product);
         public Product? FindOneByName(string name);
     }
 }
