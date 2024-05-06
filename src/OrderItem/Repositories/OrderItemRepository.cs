@@ -1,23 +1,32 @@
+using Microsoft.EntityFrameworkCore;
+
+
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class OrderItemRepository : IOrderItemRepository
     {
-        private List<OrderItem> _orderitems;
+        private DatabaseContext _dbContext;
+
+        private IEnumerable<OrderItem> _orderitems;
+
+
         public OrderItemRepository(DatabaseContext databaseContext)
         {
             _orderitems = databaseContext.OrderItem;
+            _dbContext = databaseContext;
+
         }
 
-        public List<OrderItem> FindAll()
+        public IEnumerable<OrderItem> FindAll()
         {
             return _orderitems;
         }
 
 
-        public OrderItem? UpdateOne(string orderItemId, int newQuantity, decimal newTotalPrice)
+        public OrderItem? UpdateOne(Guid orderItemId, int newQuantity, decimal newTotalPrice)
         {
 
-            OrderItem? itemToUpdate = _orderitems.FirstOrDefault(item => item.OrderItemId == orderItemId);
+            OrderItem? itemToUpdate = _orderitems.FirstOrDefault(item => item.Id == orderItemId);
             if (itemToUpdate != null)
             {
                 // Update properties of the found item
@@ -34,25 +43,27 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
 
 
-        public List<OrderItem> DeleteAll()
+        public void DeleteAll()
         {
-
-
-            _orderitems.Clear();
-
-            return _orderitems;
-
+            _dbContext.OrderItem.RemoveRange(_orderitems);
+            _dbContext.SaveChanges();
         }
 
-        public OrderItem? FindOne(string foundOrderItem)
+
+
+
+
+
+
+        public OrderItem? FindOne(Guid foundOrderItem)
         {
-            OrderItem? order = _orderitems.FirstOrDefault(o => o.OrderId == foundOrderItem);
+            OrderItem? order = _orderitems.FirstOrDefault(o => o.Id == foundOrderItem);
             return order;
         }
 
         public OrderItem CreateOne(OrderItem orderitem)
         {
-            _orderitems = (List<OrderItem>)_orderitems.Append(orderitem);
+            _orderitems = (DbSet<OrderItem>)_orderitems.Append(orderitem);
             return orderitem;
         }
 

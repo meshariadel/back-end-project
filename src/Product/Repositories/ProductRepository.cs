@@ -2,31 +2,36 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class ProductRepository : IProductRepository
     {
-        private IEnumerable<Product> _product;
+        private IEnumerable<Product> _products;
 
+        private DatabaseContext _dbContext;
         public ProductRepository(DatabaseContext databaseContext)
         {
-            _product = databaseContext.Products;
+            _products = databaseContext.Product;
+            _dbContext = databaseContext;
         }
         public IEnumerable<Product> FindAll()
         {
-            return _product;
+            return _products;
         }
-        public Product? FindOne(string foundProduct)
+        public Product? FindOne(Guid foundProduct)
         {
-            Product? product = _product.FirstOrDefault(product => product.ProductId == foundProduct);
-            return product;
+            return _dbContext.Product.Find(foundProduct);
+        }
+        public Product? FindOneByName(string name)
+        {
+            return _dbContext.Product.Find(name);
         }
 
         public Product CreateOne(Product product)
         {
-            _product = _product.Append(product);
+            _products = _products.Append(product);
             return product;
         }
 
         public Product UpdateOne(Product updatedProduct)
         {
-            var products = _product.Select(product =>
+            var products = _products.Select(product =>
         {
             if (product.Name == updatedProduct.Name)
             {
@@ -35,9 +40,15 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             }
             return updatedProduct;
         });
-            _product = products.ToList();
+            _products = products.ToList();
 
             return updatedProduct;
         }
+        public bool DeleteOne(Guid productId)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

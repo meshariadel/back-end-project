@@ -20,7 +20,41 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return usersRead;
         }
 
-        public ProductReadDto? FindOne(string product)
+
+
+
+
+        public Product CreateOne(Product product)
+        {
+            Product? foundProduct = _productRepository.FindOneByName(product.Name);
+
+            if (foundProduct is not null)
+            {
+                throw new Exception("Product " + product.Name + " already exists");
+            }
+            return _productRepository.CreateOne(product);
+        }
+
+        public Product UpdateOne(Guid productId, Product updatedProduct)
+        {
+            Product? product = _productRepository.FindOneByName(productId.ToString());
+            if (product is not null)
+            {
+                return _productRepository.UpdateOne(product);
+
+            }
+            throw new Exception("Product " + productId + " do not exists");
+        }
+
+        public bool DeleteOne(Guid id)
+        {
+
+            Product? product = _productRepository.FindOne(id);
+            _productRepository.DeleteOne(id);
+            throw new NotImplementedException();
+        }
+
+        public ProductReadDto? FindOne(Guid product)
         {
             var productId = _productRepository.FindOne(product);
 
@@ -30,31 +64,6 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
                 return productRead;
             }
             throw new Exception("Product Id " + productId + " is not found ");
-        }
-
-
-
-        public Product CreateOne(Product product)
-        {
-            Product? foundProduct = _productRepository.FindOne(product.Name);
-
-            if (foundProduct is not null)
-            {
-                throw new Exception("Product " + product.Name + " already exists");
-            }
-            return _productRepository.CreateOne(product);
-        }
-
-        public Product UpdateOne(string productName, Product updatedProduct)
-        {
-            Product? product = _productRepository.FindOne(productName);
-            if (product is not null)
-            {
-                product.Color = updatedProduct.Color;
-                return _productRepository.UpdateOne(product);
-
-            }
-            throw new Exception("Product " + productName + " do not exists");
         }
     }
 }
