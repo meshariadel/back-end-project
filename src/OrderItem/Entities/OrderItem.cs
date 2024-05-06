@@ -6,7 +6,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         public Guid Id { get; set; }
         public Guid OrderId { get; set; }
-        public UserOrder UserOrder { get; set; }
+        public Order Order { get; set; }
         public string ProductId { get; set; }
         public int Quantity { get; set; }
 
