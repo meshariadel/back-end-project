@@ -7,7 +7,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         private DatabaseContext _dbContext;
         public ProductRepository(DatabaseContext databaseContext)
         {
-            _products = databaseContext.Products;
+            _products = databaseContext.Product;
             _dbContext = databaseContext;
         }
         public IEnumerable<Product> FindAll()
@@ -16,11 +16,11 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
         public Product? FindOne(Guid foundProduct)
         {
-            return _dbContext.Products.Find(foundProduct);
+            return _dbContext.Product.Find(foundProduct);
         }
         public Product? FindOneByName(string name)
         {
-            return _dbContext.Products.Find(name);
+            return _dbContext.Product.Find(name);
         }
 
         public Product CreateOne(Product product)
