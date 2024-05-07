@@ -26,32 +26,28 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         public Product CreateOne(Product product)
         {
-            Product? foundProduct = _productRepository.FindOneByName(product.Name);
 
-            if (foundProduct is not null)
-            {
-                throw new Exception("Product " + product.Name + " already exists");
-            }
             return _productRepository.CreateOne(product);
         }
 
         public Product UpdateOne(Guid productId, Product updatedProduct)
         {
-            Product? product = _productRepository.FindOneByName(productId.ToString());
+            Product? product = _productRepository.FindOne(productId);
             if (product is not null)
             {
                 return _productRepository.UpdateOne(product);
 
             }
-            throw new Exception("Product " + productId + " do not exists");
+            return null;
         }
 
-        public bool DeleteOne(Guid id)
+        public bool DeleteOne(Guid productId)
         {
 
-            Product? product = _productRepository.FindOne(id);
-            _productRepository.DeleteOne(id);
-            throw new NotImplementedException();
+            Product? deleteProduct = _productRepository.FindOne(productId);
+            if (deleteProduct is null) return false;
+            _productRepository.DeleteOne(deleteProduct);
+            return true;
         }
 
         public ProductReadDto? FindOne(Guid product)
@@ -63,7 +59,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
                 var productRead = _Mapper.Map<ProductReadDto>(productId);
                 return productRead;
             }
-            throw new Exception("Product Id " + productId + " is not found ");
+            return null;
         }
     }
 }

@@ -2,9 +2,9 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class ProductReadDto
     {
-        public string ProductId { get; set; }
+        public Guid ProductId { get; set; }
 
-        public string CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
         public string? Name { get; set; }
 
         public string? Description { get; set; }
