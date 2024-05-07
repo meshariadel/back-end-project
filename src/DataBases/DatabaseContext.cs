@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class DatabaseContext : DbContext
@@ -15,8 +16,19 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Database={_config["Db:Database"]};Password={_config["Db:Password"]}")
-           .UseSnakeCaseNamingConvention();
+
+
+            var dataSourceBuilder = new NpgsqlDataSourceBuilder(@$"Host={_config["Db:Host"]};
+            Username={_config["Db:Username"]};Database={_config["Db:Database"]};Password={_config["Db:Password"]}");
+            dataSourceBuilder.MapEnum<Role>();
+            var dataSource = dataSourceBuilder.Build();
+            optionsBuilder.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
+
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasPostgresEnum<Role>();
         }
     }
 }

@@ -22,4 +22,10 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         public string Email { get; set; }
         public string Password { get; set; }
     }
+
+    public class UserLogin
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
 }
