@@ -4,13 +4,13 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
     {
 
         public IEnumerable<Product> FindAll();
-        public Product? FindOne(Guid product);
+        public Product? FindOne(Guid productId);
 
         public Product CreateOne(Product product);
 
         public Product UpdateOne(Product updatedProduct);
 
         public bool DeleteOne(Product product);
-        public Product? FindOneByName(string name);
+
     }
 }
