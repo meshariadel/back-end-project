@@ -15,11 +15,11 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         {
             return _order;
         }
-        public IEnumerable<Order> CreateOne(Order order)
+        public Order CreateOne(Order order)
         {
             _order.Add(order);
             _dbContext.SaveChanges();
-            return _order;
+            return order;
         }
         public Order? FindOne(Order NewOrder)
         {

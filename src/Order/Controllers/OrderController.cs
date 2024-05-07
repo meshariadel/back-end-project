@@ -26,13 +26,13 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public ActionResult<Order> CreateOne([FromBody] Order order)
+        public ActionResult<OrderReadDto> CreateOne([FromBody] List<OrderCreateDto> orderCheckout)
         {
             //creating order
-            if (order is not null)
+            if (orderCheckout is not null)
             {
-                var createdUserOrder = _orderService.CreateOne(order);
-                return CreatedAtAction(nameof(CreateOne), createdUserOrder);
+                // var createdUserOrder = _orderService.CreateOne(order);
+                // return CreatedAtAction(nameof(CreateOne), createdUserOrder);
             }
             return BadRequest();
 
