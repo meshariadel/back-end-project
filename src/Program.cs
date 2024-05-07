@@ -12,7 +12,7 @@ builder.Services.AddDbContext<DatabaseContext>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // Adding injections in Container
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();

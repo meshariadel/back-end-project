@@ -31,8 +31,8 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             //creating order
             if (orderCheckout is not null)
             {
-                // var createdUserOrder = _orderService.CreateOne(order);
-                // return CreatedAtAction(nameof(CreateOne), createdUserOrder);
+                _orderService.CreateOne(orderCheckout);
+                return Ok();
             }
             return BadRequest();
 

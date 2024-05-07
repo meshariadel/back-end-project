@@ -7,7 +7,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
     {
         private DatabaseContext _dbContext;
 
-        private IEnumerable<OrderItem> _orderitems;
+        private DbSet<OrderItem> _orderitems;
 
 
         public OrderItemRepository(DatabaseContext databaseContext)
@@ -63,7 +63,8 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         public OrderItem CreateOne(OrderItem orderitem)
         {
-            _orderitems = (DbSet<OrderItem>)_orderitems.Append(orderitem);
+            _orderitems.Add(orderitem);
+            _dbContext.SaveChanges();
             return orderitem;
         }
 
