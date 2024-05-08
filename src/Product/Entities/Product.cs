@@ -4,8 +4,9 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
     public class Product
     {
 
-        public Guid ProductId { get; set; }
+        public Guid Id { get; set; }
         public Guid CategoryId { get; set; }
+        public List<OrderItem> OrderItemsId { get; set; }
         public ProductSize Size { get; set; }
         public string? Color { get; set; }
         public double Price { get; set; }

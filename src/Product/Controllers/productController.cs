@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
@@ -33,6 +34,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -47,6 +49,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
 
         [HttpPatch]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         // [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<ProductReadDto> UpdateOne(Guid productId, [FromBody] ProductUpdateDto updatedProduct)
@@ -58,6 +61,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
 
         [HttpDelete(":productId")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         public ActionResult DeleteOne(Guid productId)
         {
