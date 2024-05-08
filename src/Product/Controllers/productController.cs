@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
-    public class productController : ControllerTemplate
+    public class ProductController : ControllerTemplate
     {
 
         private IProductService _productService;
-        public productController(IProductService productService)
+        public ProductController(IProductService productService)
         {
             _productService = productService;
         }
@@ -29,12 +29,11 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             {
                 return CreatedAtAction(nameof(FindOne), foundProduct);
             }
-            else
-                return BadRequest();
+            return BadRequest();
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
@@ -49,7 +48,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
 
         [HttpPatch]
-        [Authorize(Roles = "Admin")]
+
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         // [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<ProductReadDto> UpdateOne(Guid productId, [FromBody] ProductUpdateDto updatedProduct)
@@ -60,8 +59,8 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
 
 
-        [HttpDelete(":productId")]
-        [Authorize(Roles = "Admin")]
+        [HttpDelete("{productId}")]
+
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         public ActionResult DeleteOne(Guid productId)
         {

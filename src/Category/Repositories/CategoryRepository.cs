@@ -41,12 +41,6 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return _dbContext.Category.Find(categoryId);
         }
 
-        public Category? UpdateOne(Category updateCategory)
-        {
-            _dbContext.Category.Update(updateCategory);
-            _dbContext.SaveChanges();
-            return updateCategory;
-        }
 
     }
 }
