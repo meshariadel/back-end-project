@@ -6,38 +6,46 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
     public class CategoryRepository : ICategoryRepository
     {
         private DbSet<Category> _category;
-        private DatabaseContext _databaseContext;
+        private DatabaseContext _dbContext;
 
         public CategoryRepository(DatabaseContext databaseContext)
         {
             _category = databaseContext.Category;
-            _databaseContext = databaseContext;
+            _dbContext = databaseContext;
         }
         public Category CreateOne(Category category)
         {
             _category.Add(category);
-            _databaseContext.SaveChanges();
+            _dbContext.SaveChanges();
             return category;
         }
 
-        public Category? DeleteOne(Guid categoryId)
+        public bool DeleteOne(Category category)
         {
-            throw new NotImplementedException();
+            _dbContext.Category.Remove(category);
+            _dbContext.SaveChanges();
+            return true;
         }
 
-        public IEnumerable<Category> FindAll()
+        public IEnumerable<Category> FindAll(int limit, int offset)
         {
-            throw new NotImplementedException();
+            if (limit == 0 & offset == 0)
+            {
+                return _category;
+            }
+            return _category.Skip(offset).Take(limit);
         }
 
         public Category? FindOne(Guid categoryId)
         {
-            throw new NotImplementedException();
+            return _dbContext.Category.Find(categoryId);
         }
 
         public Category? UpdateOne(Category updateCategory)
         {
-            throw new NotImplementedException();
+            _dbContext.Category.Update(updateCategory);
+            _dbContext.SaveChanges();
+            return updateCategory;
         }
 
     }
