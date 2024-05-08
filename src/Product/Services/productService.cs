@@ -36,22 +36,14 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             Product? product = _productRepository.FindOne(productId);
             if (product is not null)
             {
-                product.Description = updatedProduct.Description;
-                product.Stock = updatedProduct.Stock;
-                product.Price = updatedProduct.Price;
-                product.Color = updatedProduct.Color;
-                product.Name = updatedProduct.Name;
-                product.Size = updatedProduct.size;
                 _productRepository.UpdateOne(product);
                 return _Mapper.Map<ProductReadDto>(product);
-
             }
             return null;
         }
 
         public bool DeleteOne(Guid productId)
         {
-
             Product? deleteProduct = _productRepository.FindOne(productId);
             if (deleteProduct is null) return false;
             _productRepository.DeleteOne(deleteProduct);
