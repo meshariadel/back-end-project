@@ -13,29 +13,37 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             _config = config;
             _Mapper = mapper;
         }
-        public IEnumerable<ProductReadDto> FindAll()
+        public IEnumerable<ProductReadDto> FindAll(int limit, int offset)
         {
-            var products = _productRepository.FindAll();
-            var usersRead = products.Select(_Mapper.Map<ProductReadDto>);
-            return usersRead;
+
+            IEnumerable<Product> products = _productRepository.FindAll(limit, offset);
+            return products.Select(_Mapper.Map<ProductReadDto>);
         }
 
 
 
 
 
-        public Product CreateOne(Product product)
+        public ProductReadDto CreateOne(ProductCreateDto newProduct)
         {
-
-            return _productRepository.CreateOne(product);
+            var product = _Mapper.Map<Product>(newProduct);
+            _productRepository.CreateOne(product);
+            return _Mapper.Map<ProductReadDto>(product);
         }
 
-        public Product UpdateOne(Guid productId, Product updatedProduct)
+        public ProductReadDto UpdateOne(Guid productId, ProductUpdateDto updatedProduct)
         {
             Product? product = _productRepository.FindOne(productId);
             if (product is not null)
             {
-                return _productRepository.UpdateOne(product);
+                product.Description = updatedProduct.Description;
+                product.Stock = updatedProduct.Stock;
+                product.Price = updatedProduct.Price;
+                product.Color = updatedProduct.Color;
+                product.Name = updatedProduct.Name;
+                product.Size = updatedProduct.size;
+                _productRepository.UpdateOne(product);
+                return _Mapper.Map<ProductReadDto>(product);
 
             }
             return null;
