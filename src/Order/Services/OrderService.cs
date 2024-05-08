@@ -23,39 +23,41 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             var ordersRead = orders.Select(_Mapper.Map<OrderReadDto>);
             return ordersRead;
         }
-        public void CreateOne(List<OrderCreateDto> orderCheckout)
+        public void CreateOne(List<OrderCreateDto> orderCheckout, string userId)
         {
+            Console.WriteLine($"{userId}");
             /*
             1. create Order
             2. loop thru orderCheckout and create order item per iteration
             */
-            Order order = new Order
+            Order order = new()
             {
                 AddressId = orderCheckout[0].AddressId,
                 CreatedAt = DateTime.Now,
                 DeliveryAt = DateTime.Now,
-                UserId = new Guid("7130c5eb-51c0-4080-a573-84c1a3e39c7a"),
+                UserId = new Guid(userId),
                 PaymentId = Guid.NewGuid(),
                 TotalPirce = 0,
-
             };
-            order = _orderRepository.CreateOne(order);
+            _orderRepository.CreateOne(order);
+            Console.WriteLine($"{order.Id}");
 
-            
-            foreach (var item in orderCheckout)
+            // productPrice??  find the product by id and get it's price
+            // var productPrice = Prod
+                  foreach (var item in orderCheckout)
             {
-                
-                decimal total = 0;
                 var orderItem = new OrderItem
                 {
                     OrderId = order.Id,
                     ProductId = item.ProductId,
-                    Quantity = item.Quantity
-                    
+                    Quantity = item.Quantity,
+                    // TotalPirce = productPrice * item.Quantity
                 };
-                total = total + orderItem.TotalPirce;
+                order.TotalPirce += orderItem.TotalPirce;
                 _orderItemService.CreateOne(orderItem);
             }
+
+            _orderRepository.UpdateOne(order);
 
             // map order to OrderReadDto
             /*

@@ -5,7 +5,7 @@ using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers;
 using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
-
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 builder.Services.AddControllers();

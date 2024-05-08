@@ -59,6 +59,8 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         public UserReadDto SignUp(UserCreateDto newUser)
         {
+
+
             // Check if email is already in use
             User? foundUser = _userRepository.GetOneByEmail(newUser.Email);
             if (foundUser is not null) throw CustomErrorException
@@ -77,9 +79,11 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         public string? Login(UserLogin userLogin)
         {
+            Console.WriteLine($"{userLogin.Email}");
+            Console.WriteLine($"{userLogin.Password}");
             // Check if the user exists by email
             User? user = _userRepository.GetOneByEmail(userLogin.Email);
-            if (user is null) throw CustomErrorException.WrongCredentials("Error: Wrong Credentials !");
+            if (user is null) throw CustomErrorException.WrongCredentials("Error: Wrong Credentials! !");
             // Check if the password is correct
             byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt:Pepper"]);
             bool matchedPassword = PasswordUtils.VerifyPassword(userLogin.Password, user.Password, pepper);
@@ -89,7 +93,8 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
              {
             new Claim(ClaimTypes.Name, user.FullName),
             new Claim(ClaimTypes.Role, user.Role.ToString()),
-            new Claim(ClaimTypes.Email, user.Email)
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
         };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SigningKey"]!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
