@@ -8,7 +8,10 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         public Guid AddressId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime DeliveryAt { get; set; }
-        public OrderStatus Status { get; set; } = OrderStatus.Processing;
+        public OrderStatus Status { get; set; }
+        public decimal TotalPirce { get; set; }
+
+
         public User user { get; set; }
         public IEnumerable<OrderItem> OrderItems { get; set; }
 

@@ -33,19 +33,26 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             {
                 AddressId = orderCheckout[0].AddressId,
                 CreatedAt = DateTime.Now,
-                UserId = new Guid("ab19e11f-9481-4595-8c93-772fc282f651"),
-                PaymentId = Guid.NewGuid()
+                DeliveryAt = DateTime.Now,
+                UserId = new Guid("7130c5eb-51c0-4080-a573-84c1a3e39c7a"),
+                PaymentId = Guid.NewGuid(),
+                TotalPirce = 0,
+
             };
             order = _orderRepository.CreateOne(order);
+
+            
             foreach (var item in orderCheckout)
             {
+                
+                decimal total = 0;
                 var orderItem = new OrderItem
                 {
                     OrderId = order.Id,
                     ProductId = item.ProductId,
                     Quantity = item.Quantity
                 };
-
+                total = orderItem.TotalPirce;
                 _orderItemService.CreateOne(orderItem);
             }
 
