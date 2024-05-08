@@ -12,7 +12,7 @@ using sda_onsite_2_csharp_backend_teamwork_The_countryside_developers;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240506115157_db-init")]
+    [Migration("20240508073201_db-init")]
     partial class dbinit
     {
         /// <inheritdoc />
@@ -24,6 +24,76 @@ namespace Backend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("AddressId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("address_id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<DateTime>("DeliveryAt")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("delivery_at");
+
+                    b.Property<Guid>("PaymentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("payment_id");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer")
+                        .HasColumnName("status");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_order");
+
+                    b.ToTable("order", (string)null);
+                });
+
+            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.OrderItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("order_id");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("product_id");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer")
+                        .HasColumnName("quantity");
+
+                    b.Property<decimal>("TotalPirce")
+                        .HasColumnType("numeric")
+                        .HasColumnName("total_pirce");
+
+                    b.HasKey("Id")
+                        .HasName("pk_order_item");
+
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_order_item_order_id");
+
+                    b.ToTable("order_item", (string)null);
+                });
 
             modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Product", b =>
                 {
@@ -94,7 +164,6 @@ namespace Backend.Migrations
                         .HasColumnName("password");
 
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("role");
 
@@ -104,41 +173,16 @@ namespace Backend.Migrations
                     b.ToTable("user", (string)null);
                 });
 
-            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.UserOrder", b =>
+            modelBuilder.Entity("sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.OrderItem", b =>
                 {
-                    b.Property<string>("AddressId")
+                    b.HasOne("sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("address_id");
+                        .HasConstraintName("fk_order_item_order_order_id");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_at");
-
-                    b.Property<DateTime>("DeliveryAt")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("delivery_at");
-
-                    b.Property<string>("OrderId")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("order_id");
-
-                    b.Property<string>("PaymentId")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("payment_id");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("integer")
-                        .HasColumnName("status");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("user_id");
-
-                    b.ToTable("user_order", (string)null);
+                    b.Navigation("Order");
                 });
 #pragma warning restore 612, 618
         }

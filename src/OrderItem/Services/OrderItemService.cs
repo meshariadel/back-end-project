@@ -44,7 +44,9 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
                 var orderRead = _Mapper.Map<OrderItem>(orderId);
                 return orderRead;
             }
-            throw new Exception("Order Id " + orderId + " is not found ");
+            Console.WriteLine("Order Id " + orderId + " is not found ");
+            return null;
+
         }
 
 
@@ -55,7 +57,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
             if (foundOrderItem is not null)
             {
-                throw new Exception("OrderItem " + orderItem.Id + " already exists");
+                Console.WriteLine("OrderItem " + orderItem.Id + " already exists");
             }
             return _orderItemRepository.CreateOne(orderItem);
         }
