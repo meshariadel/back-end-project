@@ -39,18 +39,6 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             _dbContext.Product.Update(updatedProduct);
             _dbContext.SaveChanges();
             return updatedProduct;
-            //     var products = _products.Select(product =>
-            // {
-            //     if (product.Name == updatedProduct.Name)
-            //     {
-
-            //         return updatedProduct;
-            //     }
-            //     return updatedProduct;
-            // });
-            //     _products = products.ToList();
-
-            //     return updatedProduct;
         }
         public bool DeleteOne(Product product)
         {
