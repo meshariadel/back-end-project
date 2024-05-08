@@ -22,7 +22,8 @@ builder.Services.AddScoped<IProductService, productService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 builder.Services.AddScoped<IOrderItemService, OrderItemService>();
-
+// builder.Services.AddScoped<IPaymentService, PaymentService>();
+// builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 
 var app = builder.Build();
 app.MapControllers();
