@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
@@ -10,9 +11,10 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             _productService = productService;
         }
         [HttpGet]
-        public IEnumerable<ProductReadDto> FindAll()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<IEnumerable<ProductReadDto>> FindAll([FromQuery(Name = "limit")] int limit, [FromQuery(Name = "offset")] int offset)
         {
-            return _productService.FindAll();
+            return Ok(_productService.FindAll(limit, offset));
 
         }
         [HttpGet("{productId}")]
@@ -32,10 +34,11 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public ActionResult<Product> CreateOne([FromBody] Product product)
+        public ActionResult<ProductReadDto> CreateOne([FromBody] ProductCreateDto product)
         {
             if (product is not null)
             {
@@ -45,20 +48,20 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return BadRequest();
         }
 
-        [HttpPatch("{productName}")]
-        // [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [HttpPatch]
+        [Authorize(Roles = "Admin")]
+        [ProducesResponseType(StatusCodes.Status202Accepted)]
         // [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public Product? UpdateOne(Guid productId, [FromBody] Product product)
+        public ActionResult<ProductReadDto> UpdateOne(Guid productId, [FromBody] ProductUpdateDto updatedProduct)
         {
-
-            if (product is not null)
-            {
-                return _productService.UpdateOne(productId, product);
-
-            }
-            return null;
+            ProductReadDto product = _productService.UpdateOne(productId, updatedProduct);
+            return Accepted(product);
         }
+
+
+
         [HttpDelete(":productId")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         public ActionResult DeleteOne(Guid productId)
         {

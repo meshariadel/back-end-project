@@ -13,10 +13,15 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             _products = databaseContext.Product;
             _dbContext = databaseContext;
         }
-        public IEnumerable<Product> FindAll()
+        public IEnumerable<Product> FindAll(int limit, int offset)
         {
-            return _products;
+            if (limit == 0 & offset == 0)
+            {
+                return _products;
+            }
+            return _products.Skip(offset).Take(limit);
         }
+
         public Product? FindOne(Guid productId)
         {
             return _dbContext.Product.Find(productId);
@@ -34,18 +39,6 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             _dbContext.Product.Update(updatedProduct);
             _dbContext.SaveChanges();
             return updatedProduct;
-            //     var products = _products.Select(product =>
-            // {
-            //     if (product.Name == updatedProduct.Name)
-            //     {
-
-            //         return updatedProduct;
-            //     }
-            //     return updatedProduct;
-            // });
-            //     _products = products.ToList();
-
-            //     return updatedProduct;
         }
         public bool DeleteOne(Product product)
         {

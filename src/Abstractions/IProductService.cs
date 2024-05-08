@@ -2,10 +2,10 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public interface IProductService
     {
-        public IEnumerable<ProductReadDto> FindAll();
+        public IEnumerable<ProductReadDto> FindAll(int limit, int offset);
         public ProductReadDto? FindOne(Guid product);
-        public Product CreateOne(Product product);
-        public Product UpdateOne(Guid productId, Product product);
+        public ProductReadDto CreateOne(ProductCreateDto product);
+        public ProductReadDto UpdateOne(Guid productId, ProductUpdateDto product);
         public bool DeleteOne(Guid product);
     }
 }
