@@ -1,31 +1,52 @@
 
+using AutoMapper;
+
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class CategoryService : ICategoryService
     {
-        public CategoryReadDto CreateOne(CategoryCreateDto category)
+        private ICategoryRepository _categoryRepository;
+        private IConfiguration _config;
+
+        private IMapper _Mapper;
+        public CategoryService(ICategoryRepository categoryRepository, IConfiguration config, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _categoryRepository = categoryRepository;
+            _config = config;
+            _Mapper = mapper;
+        }
+        public CategoryReadDto CreateOne(CategoryCreateDto newCategory)
+        {
+
+            var category = _Mapper.Map<Category>(newCategory);
+            _categoryRepository.CreateOne(category);
+            return _Mapper.Map<CategoryReadDto>(category);
         }
 
-        public CategoryReadDto? DeleteOne(Guid categoryId)
+        public bool DeleteOne(Guid categoryId)
         {
-            throw new NotImplementedException();
+            Category? deleteCategory = _categoryRepository.FindOne(categoryId);
+            if (deleteCategory is null) return false;
+            _categoryRepository.DeleteOne(deleteCategory);
+            return true;
         }
 
-        public IEnumerable<CategoryReadDto> FindAll()
+        public IEnumerable<CategoryReadDto> FindAll(int limit, int offset)
         {
-            throw new NotImplementedException();
+            IEnumerable<Category> categories = _categoryRepository.FindAll(limit, offset);
+            return categories.Select(_Mapper.Map<CategoryReadDto>);
         }
 
-        public CategoryReadDto? FindOne(Guid categoryId)
+        public CategoryReadDto? FindOne(Guid category)
         {
-            throw new NotImplementedException();
-        }
+            var categoryId = _categoryRepository.FindOne(category);
+            if (categoryId is not null)
+            {
+                var categoryRead = _Mapper.Map<CategoryReadDto>(categoryId);
+                return categoryRead;
 
-        public CategoryReadDto? UpdateOne(Guid categoryId, CategoryUpdateDto categoryUpdate)
-        {
-            throw new NotImplementedException();
+            }
+            return null;
         }
 
     }
