@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
@@ -15,26 +16,39 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
 
         [HttpGet]
+        //[Authorize(Roles = "Admin")]
         public IEnumerable<UserReadDto> GetAll()
         {
             return _userService.GetAll();
         }
 
         [HttpGet("{userId}")]
-        public UserReadDto? GetOne(Guid userId)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<UserReadDto>? GetOne(Guid userId)
         {
-            return _userService.GetOne(userId);
+            var user = _userService.GetOne(userId);
+            return Ok(user);
         }
 
         [HttpPatch("{userId}")]
-
-        public UserReadDto UpdateOne(Guid userId, [FromBody] UserUpdateDto updatedUser)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<UserReadDto> UpdateOne(Guid userId, [FromBody] UserUpdateDto updatedUser)
         {
-            return _userService.UpdateOne(userId, updatedUser);
+            if (updatedUser is not null)
+            {
+                UserReadDto user = _userService.UpdateOne(userId, updatedUser);
+                return Ok(user);
+
+            }
+            return BadRequest();
         }
 
-        [HttpPost("SignIn")]
+        [HttpPost("SignUp")]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<UserReadDto> SignUp([FromBody] UserCreateDto newUser)
         {
@@ -49,27 +63,25 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         [HttpPost("Login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public ActionResult<UserReadDto> Login([FromBody] UserLogin User)
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public ActionResult<string> Login([FromBody] UserLogin User)
         {
             if (User is not null)
             {
 
-                UserReadDto loginUser = _userService.Login(User);
-                if (loginUser is null) return BadRequest();
+                string token = _userService.Login(User);
+                if (token is null) return BadRequest();
 
-                return Ok(loginUser);
+                return Ok(token);
             }
             return BadRequest();
         }
 
         [HttpDelete("{userId}")]
+        [Authorize(Roles = "Admin")]
         public void Delete(Guid userId)
         {
             _userService.Delete(userId);
         }
-
-
-
     }
 }
