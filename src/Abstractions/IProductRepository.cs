@@ -3,7 +3,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
     public interface IProductRepository
     {
 
-        public IEnumerable<Product> FindAll();
+        public IEnumerable<Product> FindAll(int limit, int offset);
         public Product? FindOne(Guid productId);
 
         public Product CreateOne(Product product);
