@@ -49,7 +49,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
                 return CreatedAtAction(nameof(FindOne), foundOrderItem);
             }
             else
-                return BadRequest();
+                return NotFound();
         }
 
 
