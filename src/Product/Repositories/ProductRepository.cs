@@ -27,6 +27,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return _dbContext.Product.Find(productId);
         }
 
+
         public Product CreateOne(Product product)
         {
             _products.Add(product);
@@ -45,6 +46,12 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             _dbContext.Product.Remove(product);
             _dbContext.SaveChanges();
             return true;
+        }
+        public IEnumerable<Product> Search(string keyword)
+        {
+            return _dbContext.Product
+                    .Where(p => p.Name.Contains(keyword))
+                    .ToList();
         }
 
     }

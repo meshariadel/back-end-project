@@ -36,22 +36,19 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             Product? product = _productRepository.FindOne(productId);
             if (product is not null)
             {
-                product.Description = updatedProduct.Description;
-                product.Stock = updatedProduct.Stock;
-                product.Price = updatedProduct.Price;
-                product.Color = updatedProduct.Color;
                 product.Name = updatedProduct.Name;
-                product.Size = updatedProduct.size;
+                product.Description = updatedProduct.Description;
+                product.Price = updatedProduct.Price;
+                product.Stock = updatedProduct.Stock;
+                product.Color = updatedProduct.Color;
                 _productRepository.UpdateOne(product);
                 return _Mapper.Map<ProductReadDto>(product);
-
             }
             return null;
         }
 
         public bool DeleteOne(Guid productId)
         {
-
             Product? deleteProduct = _productRepository.FindOne(productId);
             if (deleteProduct is null) return false;
             _productRepository.DeleteOne(deleteProduct);
@@ -68,6 +65,24 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
                 return productRead;
             }
             return null;
+        }
+        public List<ProductReadDto> Search(string keyword)
+        {
+
+            var foundProducts = _productRepository.Search(keyword)
+            .Where(product => product.Name.Contains(keyword))
+            .Select(product => new ProductReadDto
+            {
+                Size = product.Size.ToString(),
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                Stock = product.Stock,
+                Color = product.Color,
+
+            })
+            .ToList();
+            return foundProducts;
         }
     }
 }
