@@ -31,6 +31,19 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             }
             return BadRequest();
         }
+        [HttpGet("search")]
+        //This action method gives user the capability to search by keywords.
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<IEnumerable<ProductReadDto>> Search(string keyword)
+        {
+            List<ProductReadDto> foundProduct = _productService.Search(keyword);
+            if (foundProduct.Count == 0)
+                return NotFound();
+
+            return Ok(foundProduct);
+        }
 
         [HttpPost]
 
