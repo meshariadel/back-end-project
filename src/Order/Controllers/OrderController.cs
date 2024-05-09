@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
@@ -22,16 +24,18 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return _orderService.FindOneById(id);
         }
 
+        [Authorize(Roles = "Admin,User")]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
         public ActionResult<OrderReadDto> CreateOne([FromBody] List<OrderCreateDto> orderCheckout)
         {
+            string? userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             //creating order
-            if (orderCheckout is not null)
+            if (orderCheckout is not null && userId is not null)
             {
-                _orderService.CreateOne(orderCheckout);
+                _orderService.CreateOne(orderCheckout, userId);
                 return Ok();
             }
             return BadRequest();
