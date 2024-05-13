@@ -24,6 +24,10 @@ builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 builder.Services.AddScoped<IOrderItemService, OrderItemService>();
 
 
+
+builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<IAddressRepository, AddressRepository>();
+
 var app = builder.Build();
 app.MapControllers();
 // Configure the HTTP request pipeline.
