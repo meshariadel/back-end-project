@@ -1,3 +1,4 @@
+using System.Data;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
@@ -12,7 +13,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         public DbSet<Category> Category { get; set; }
         // public DbSet<Payment> Payment { get; set; }
         private IConfiguration _config;
-        public DatabaseContext(IConfiguration config)
+        public DatabaseContext(IConfiguration config, DbContextOptions<DatabaseContext> options) : base(options)
         {
             _config = config;
         }
