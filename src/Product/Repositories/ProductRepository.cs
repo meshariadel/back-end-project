@@ -13,14 +13,24 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             _products = databaseContext.Product;
             _dbContext = databaseContext;
         }
-        public IEnumerable<Product> FindAll(int limit, int offset)
+        /*  public IEnumerable<Product> FindAll(int limit, int offset)
+          {
+              if (limit == 0 & offset == 0)
+              {
+                  return _products;
+              }
+              return _products.Skip(offset).Take(limit);
+          }*/
+
+
+        public IEnumerable<Product> FindAll()
         {
-            if (limit == 0 & offset == 0)
-            {
-                return _products;
-            }
-            return _products.Skip(offset).Take(limit);
+
+            return _products;
+
         }
+
+
 
         public Product? FindOne(Guid productId)
         {

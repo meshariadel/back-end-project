@@ -13,13 +13,27 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             _config = config;
             _Mapper = mapper;
         }
-        public IEnumerable<ProductReadDto> FindAll(int limit, int offset)
+        /*    public IEnumerable<ProductReadDto> FindAll(int limit, int offset)
+            {
+
+                IEnumerable<Product> products = _productRepository.FindAll(limit, offset);
+                return products.Select(_Mapper.Map<ProductReadDto>);
+            }
+
+    */
+
+        public IEnumerable<ProductReadDto> FindAll(string? searchBy)
         {
 
-            IEnumerable<Product> products = _productRepository.FindAll(limit, offset);
-            return products.Select(_Mapper.Map<ProductReadDto>);
-        }
+            IEnumerable<Product> products = _productRepository.FindAll();
+            if (searchBy is not null)
+            {
 
+                products = products.Where(products => products.Name.ToLower().Contains(searchBy.ToLower()));
+            }
+            return products.Select(_Mapper.Map<ProductReadDto>);
+
+        }
 
 
 
@@ -40,7 +54,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
                 product.Description = updatedProduct.Description;
                 product.Price = updatedProduct.Price;
                 product.Stock = updatedProduct.Stock;
-                product.Color = updatedProduct.Color;
+                product.Features = updatedProduct.Features;
                 _productRepository.UpdateOne(product);
                 return _Mapper.Map<ProductReadDto>(product);
             }
@@ -78,7 +92,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
                 Description = product.Description,
                 Price = product.Price,
                 Stock = product.Stock,
-                Color = product.Color,
+                Features = product.Features,
 
             })
             .ToList();

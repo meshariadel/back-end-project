@@ -21,14 +21,14 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers.src.Mi
 
 
             }
-            catch (Exception e)
-            {
-                context.Response.StatusCode = 500;
-                context.Response.ContentType = "text/plain";
-                await context.Response.WriteAsync("Error: Something went wrong ! ");
-                Console.WriteLine($"ERROR: {e.Message}");
+            // catch (Exception e)
+            // {
+            //     context.Response.StatusCode = 500;
+            //     context.Response.ContentType = "text/plain";
+            //     await context.Response.WriteAsync("Error: Something went wrong ! ");
+            //     Console.WriteLine($"ERROR: {e.Message}");
 
-            }
+            // }
 
         }
     }

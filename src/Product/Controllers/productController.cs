@@ -12,9 +12,17 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         }
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<ProductReadDto>> FindAll([FromQuery(Name = "limit")] int limit, [FromQuery(Name = "offset")] int offset)
+        /* public ActionResult<IEnumerable<ProductReadDto>> FindAll([FromQuery(Name = "limit")] int limit, [FromQuery(Name = "offset")] int offset)
+         {
+             return Ok(_productService.FindAll(limit, offset));
+
+         }
+
+         */
+
+        public ActionResult<IEnumerable<ProductReadDto>> FindAll([FromQuery(Name = "searchBy")] string? searchBy)
         {
-            return Ok(_productService.FindAll(limit, offset));
+            return Ok(_productService.FindAll(searchBy));
 
         }
         [HttpGet("{productId}")]
@@ -60,7 +68,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             return BadRequest();
         }
 
-        [HttpPatch]
+        [HttpPatch("{productId}")]
 
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         // [ProducesResponseType(StatusCodes.Status400BadRequest)]
