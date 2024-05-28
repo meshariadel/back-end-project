@@ -13,14 +13,63 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             _config = config;
             _Mapper = mapper;
         }
-        public IEnumerable<ProductReadDto> FindAll()
+        /*    public IEnumerable<ProductReadDto> FindAll(int limit, int offset)
+            {
+
+                IEnumerable<Product> products = _productRepository.FindAll(limit, offset);
+                return products.Select(_Mapper.Map<ProductReadDto>);
+            }
+
+    */
+
+        public IEnumerable<ProductReadDto> FindAll(string? searchBy)
         {
-            var products = _productRepository.FindAll();
-            var usersRead = products.Select(_Mapper.Map<ProductReadDto>);
-            return usersRead;
+
+            IEnumerable<Product> products = _productRepository.FindAll();
+            if (searchBy is not null)
+            {
+
+                products = products.Where(products => products.Name.ToLower().Contains(searchBy.ToLower()));
+            }
+            return products.Select(_Mapper.Map<ProductReadDto>);
+
         }
 
-        public ProductReadDto? FindOne(string product)
+
+
+
+        public ProductReadDto CreateOne(ProductCreateDto newProduct)
+        {
+            var product = _Mapper.Map<Product>(newProduct);
+            _productRepository.CreateOne(product);
+            return _Mapper.Map<ProductReadDto>(product);
+        }
+
+        public ProductReadDto UpdateOne(Guid productId, ProductUpdateDto updatedProduct)
+        {
+            Product? product = _productRepository.FindOne(productId);
+            if (product is not null)
+            {
+                product.Name = updatedProduct.Name;
+                product.Description = updatedProduct.Description;
+                product.Price = updatedProduct.Price;
+                product.Stock = updatedProduct.Stock;
+                product.Features = updatedProduct.Features;
+                _productRepository.UpdateOne(product);
+                return _Mapper.Map<ProductReadDto>(product);
+            }
+            return null;
+        }
+
+        public bool DeleteOne(Guid productId)
+        {
+            Product? deleteProduct = _productRepository.FindOne(productId);
+            if (deleteProduct is null) return false;
+            _productRepository.DeleteOne(deleteProduct);
+            return true;
+        }
+
+        public ProductReadDto? FindOne(Guid product)
         {
             var productId = _productRepository.FindOne(product);
 
@@ -29,32 +78,25 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
                 var productRead = _Mapper.Map<ProductReadDto>(productId);
                 return productRead;
             }
-            throw new Exception("Product Id " + productId + " is not found ");
+            return null;
         }
-
-
-
-        public Product CreateOne(Product product)
+        public List<ProductReadDto> Search(string keyword)
         {
-            Product? foundProduct = _productRepository.FindOne(product.Name);
 
-            if (foundProduct is not null)
+            var foundProducts = _productRepository.Search(keyword)
+            .Where(product => product.Name.Contains(keyword))
+            .Select(product => new ProductReadDto
             {
-                throw new Exception("Product " + product.Name + " already exists");
-            }
-            return _productRepository.CreateOne(product);
-        }
+                Size = product.Size.ToString(),
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                Stock = product.Stock,
+                Features = product.Features,
 
-        public Product UpdateOne(string productName, Product updatedProduct)
-        {
-            Product? product = _productRepository.FindOne(productName);
-            if (product is not null)
-            {
-                product.Color = updatedProduct.Color;
-                return _productRepository.UpdateOne(product);
-
-            }
-            throw new Exception("Product " + productName + " do not exists");
+            })
+            .ToList();
+            return foundProducts;
         }
     }
 }
