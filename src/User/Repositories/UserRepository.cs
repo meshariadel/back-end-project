@@ -5,7 +5,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class UserRepository : IUserRepository
     {
-        private DbSet<User> _users;
+        private Db_Set<User> _users;
         private DatabaseContext _databasecontext;
 
         public UserRepository(DatabaseContext databaseContext)

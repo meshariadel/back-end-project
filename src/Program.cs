@@ -1,5 +1,5 @@
 using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.Jwt_Bearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
@@ -11,11 +11,11 @@ builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(Program).Assembly); // Add Mapper in build
 var _config = builder.Configuration;
-var dataSourceBuilder = new NpgsqlDataSourceBuilder(@$"Host={_config["Db:Host"]};Username={_config["Db:Username"]};Database={_config["Db:Database"]};Password={_config["Db:Password"]}");
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(@$"Host={_config["Db_:Host"]};Username={_config["Db_:Username"]};Database={_config["Db_:Database"]};Password={_config["Db_:Password"]}");
 dataSourceBuilder.MapEnum<Role>();
 dataSourceBuilder.MapEnum<ProductSize>();
 var dataSource = dataSourceBuilder.Build();
-builder.Services.AddDbContext<DatabaseContext>((options) =>
+builder.Services.AddDb_Context<DatabaseContext>((options) =>
 {
     options.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
 });
@@ -50,8 +50,8 @@ builder.Services.AddCors(Options =>
     });
 });
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
+builder.Services.AddAuthentication(Jwt_BearerDefaults.AuthenticationScheme)
+    .AddJwt_Bearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -59,9 +59,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SigningKey"]!))
+            ValidIssuer = builder.Configuration["Jwt_:Issuer"],
+            ValidAudience = builder.Configuration["Jwt_:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt_:SigningKey"]!))
         };
     });
 var app = builder.Build();

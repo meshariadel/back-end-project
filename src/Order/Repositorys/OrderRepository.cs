@@ -4,12 +4,12 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class OrderRepository : IOrderRepository
     {
-        private DbSet<Order> _order;
-        private DatabaseContext _dbContext;
-        public OrderRepository(DatabaseContext dbContext)
+        private Db_Set<Order> _order;
+        private DatabaseContext _Db_Context;
+        public OrderRepository(DatabaseContext Db_Context)
         {
-            _order = dbContext.Order;
-            _dbContext = dbContext;
+            _order = Db_Context.Order;
+            _Db_Context = Db_Context;
         }
         public IEnumerable<Order> FindAll()
         {
@@ -18,7 +18,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         public Order CreateOne(Order order)
         {
             _order.Add(order);
-            _dbContext.SaveChanges();
+            _Db_Context.SaveChanges();
             return order;
         }
         public Order? FindOne(Order NewOrder)
@@ -36,7 +36,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         public Order? UpdateOne(Order updateOrder)
         {
             _order.Update(updateOrder);
-            _dbContext.SaveChanges();
+            _Db_Context.SaveChanges();
             return updateOrder;
         }
     }

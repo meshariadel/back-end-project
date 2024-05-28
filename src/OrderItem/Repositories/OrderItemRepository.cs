@@ -5,15 +5,15 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class OrderItemRepository : IOrderItemRepository
     {
-        private DatabaseContext _dbContext;
+        private DatabaseContext _Db_Context;
 
-        private DbSet<OrderItem> _orderitems;
+        private Db_Set<OrderItem> _orderitems;
 
 
         public OrderItemRepository(DatabaseContext databaseContext)
         {
             _orderitems = databaseContext.OrderItem;
-            _dbContext = databaseContext;
+            _Db_Context = databaseContext;
 
         }
 
@@ -45,8 +45,8 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         public void DeleteAll()
         {
-            _dbContext.OrderItem.RemoveRange(_orderitems);
-            _dbContext.SaveChanges();
+            _Db_Context.OrderItem.RemoveRange(_orderitems);
+            _Db_Context.SaveChanges();
         }
 
 
@@ -64,7 +64,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
         public OrderItem CreateOne(OrderItem orderitem)
         {
             _orderitems.Add(orderitem);
-            _dbContext.SaveChanges();
+            _Db_Context.SaveChanges();
             return orderitem;
         }
 

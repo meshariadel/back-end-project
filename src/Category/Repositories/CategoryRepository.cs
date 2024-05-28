@@ -5,25 +5,25 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private DbSet<Category> _category;
-        private DatabaseContext _dbContext;
+        private Db_Set<Category> _category;
+        private DatabaseContext _Db_Context;
 
         public CategoryRepository(DatabaseContext databaseContext)
         {
             _category = databaseContext.Category;
-            _dbContext = databaseContext;
+            _Db_Context = databaseContext;
         }
         public Category CreateOne(Category category)
         {
             _category.Add(category);
-            _dbContext.SaveChanges();
+            _Db_Context.SaveChanges();
             return category;
         }
 
         public bool DeleteOne(Category category)
         {
-            _dbContext.Category.Remove(category);
-            _dbContext.SaveChanges();
+            _Db_Context.Category.Remove(category);
+            _Db_Context.SaveChanges();
             return true;
         }
 
@@ -38,7 +38,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
 
         public Category? FindOne(Guid categoryId)
         {
-            return _dbContext.Category.Find(categoryId);
+            return _Db_Context.Category.Find(categoryId);
         }
 
 
