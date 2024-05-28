@@ -55,7 +55,7 @@ If you have a higher skill level and finish the previous requirements before the
 2. Use claim-based or resource-based where applicable.
 3. Peer Review:
    - Review 2 assignments from other teams.
-   - Provide constructive feeDb_ack and suggestions for improvement.
+   - Provide constructive feeDback and suggestions for improvement.
 
 `Please note that the bonus requirements and reviews are optional and can be completed if you have additional time and advanced skills.`
 

@@ -1,4 +1,4 @@
-using System.IdentityModel.Tokens.Jwt_;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AutoMapper;
@@ -66,7 +66,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             if (foundUser is not null) throw CustomErrorException
             .UserAlreadyExists($"Error: Email {newUser.Email} is already used, please sign in or use another email !");
             // Carry on
-            byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt_:Pepper"]);
+            byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt_Pepper"]);
             PasswordUtils.HashPassword(newUser.Password, out string hashedPassword, pepper);
             newUser.Password = hashedPassword;
 
@@ -85,7 +85,7 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             User? user = _userRepository.GetOneByEmail(userLogin.Email);
             if (user is null) throw CustomErrorException.WrongCredentials("Error: Wrong Credentials! !");
             // Check if the password is correct
-            byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt_:Pepper"]);
+            byte[] pepper = Encoding.UTF8.GetBytes(_config["Jwt_Pepper"]);
             bool matchedPassword = PasswordUtils.VerifyPassword(userLogin.Password, user.Password, pepper);
             if (!matchedPassword) throw CustomErrorException.WrongCredentials("Error: Wrong Credentials !");
             // Carry on
@@ -96,18 +96,18 @@ namespace sda_onsite_2_csharp_backend_teamwork_The_countryside_developers
             new Claim(ClaimTypes.Email, user.Email),
             new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
         };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt_:SigningKey"]!));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt_SigningKey"]!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var token = new Jwt_SecurityToken(
-                issuer: _config["Jwt_:Issuer"],
-                audience: _config["Jwt_:Audience"],
+            var token = new JwtSecurityToken(
+                issuer: _config["Jwt_Issuer"],
+                audience: _config["Jwt_Audience"],
                 claims: claims,
                 expires: DateTime.Now.AddDays(7),
                 signingCredentials: creds
             );
 
-            var tokenString = new Jwt_SecurityTokenHandler().WriteToken(token);
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
             return tokenString;
 

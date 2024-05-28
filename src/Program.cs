@@ -1,5 +1,5 @@
 using System.Text;
-using Microsoft.AspNetCore.Authentication.Jwt_Bearer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
@@ -11,11 +11,11 @@ builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(typeof(Program).Assembly); // Add Mapper in build
 var _config = builder.Configuration;
-var dataSourceBuilder = new NpgsqlDataSourceBuilder(@$"Host={_config["Db_:Host"]};Username={_config["Db_:Username"]};Database={_config["Db_:Database"]};Password={_config["Db_:Password"]}");
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(@$"Host={_config["Db_Host"]};Username={_config["Db_Username"]};Database={_config["Db_Database"]};Password={_config["Db_Password"]}");
 dataSourceBuilder.MapEnum<Role>();
 dataSourceBuilder.MapEnum<ProductSize>();
 var dataSource = dataSourceBuilder.Build();
-builder.Services.AddDb_Context<DatabaseContext>((options) =>
+builder.Services.AddDbContext<DatabaseContext>((options) =>
 {
     options.UseNpgsql(dataSource).UseSnakeCaseNamingConvention();
 });
@@ -42,16 +42,16 @@ builder.Services.AddCors(Options =>
     Options.AddPolicy(name: MyAllowSpecificOrigins,
     policy =>
     {
-        policy.WithOrigins(builder.Configuration["Cors:Origin"]!)
+        policy.WithOrigins(builder.Configuration["Cors_Origin"]!)
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .SetIsOriginAllowed((host) => true)
-                .AllowCredentials(); ;
+                .AllowCredentials();
     });
 });
 
-builder.Services.AddAuthentication(Jwt_BearerDefaults.AuthenticationScheme)
-    .AddJwt_Bearer(options =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
@@ -59,9 +59,9 @@ builder.Services.AddAuthentication(Jwt_BearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["Jwt_:Issuer"],
-            ValidAudience = builder.Configuration["Jwt_:Audience"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt_:SigningKey"]!))
+            ValidIssuer = builder.Configuration["Jwt_Issuer"],
+            ValidAudience = builder.Configuration["Jwt_Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt_SigningKey"]!))
         };
     });
 var app = builder.Build();
